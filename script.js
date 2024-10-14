@@ -30,7 +30,7 @@ function submitQuiz() {
   alert(`You got ${correctAnswers} out of ${totalQuestions} correct!`);
 
   // Hide the quiz, show the certificate input section
-  document.getElementById('quiz-container').style.display = 'none';
+  document.getElementById('quiz-form').style.display = 'none';
   document.getElementById('certificate-section').style.display = 'block';
 }
 
