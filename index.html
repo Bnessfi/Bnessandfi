@@ -1,100 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Science Quiz with Certificate</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Quiz</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="quiz-container">
-    <h1>Science Quiz</h1>
-    <form id="quiz-form">
-      <div class="question">
-        <p>1. What is the chemical symbol for water?</p>
-        <input type="radio" name="q1" value="H2O"> H2O<br>
-        <input type="radio" name="q1" value="CO2"> CO2<br>
-        <input type="radio" name="q1" value="O2"> O2<br>
-      </div>
-
-      <div class="question">
-        <p>2. What planet is known as the Red Planet?</p>
-        <input type="radio" name="q2" value="Venus"> Venus<br>
-        <input type="radio" name="q2" value="Mars"> Mars<br>
-        <input type="radio" name="q2" value="Jupiter"> Jupiter<br>
-      </div>
-
-      <div class="question">
-        <p>3. What is the powerhouse of the cell?</p>
-        <input type="radio" name="q3" value="Nucleus"> Nucleus<br>
-        <input type="radio" name="q3" value="Mitochondria"> Mitochondria<br>
-        <input type="radio" name="q3" value="Ribosome"> Ribosome<br>
-      </div>
-
-      <div class="question">
-        <p>4. What gas do plants absorb from the atmosphere?</p>
-        <input type="radio" name="q4" value="Oxygen"> Oxygen<br>
-        <input type="radio" name="q4" value="Nitrogen"> Nitrogen<br>
-        <input type="radio" name="q4" value="Carbon Dioxide"> Carbon Dioxide<br>
-      </div>
-
-      <div class="question">
-        <p>5. What is the boiling point of water?</p>
-        <input type="radio" name="q5" value="100°C"> 100°C<br>
-        <input type="radio" name="q5" value="50°C"> 50°C<br>
-        <input type="radio" name="q5" value="0°C"> 0°C<br>
-      </div>
-
-      <div class="question">
-        <p>6. Which part of the plant conducts photosynthesis?</p>
-        <input type="radio" name="q6" value="Roots"> Roots<br>
-        <input type="radio" name="q6" value="Stem"> Stem<br>
-        <input type="radio" name="q6" value="Leaves"> Leaves<br>
-      </div>
-
-      <div class="question">
-        <p>7. What is the hardest natural substance on Earth?</p>
-        <input type="radio" name="q7" value="Gold"> Gold<br>
-        <input type="radio" name="q7" value="Diamond"> Diamond<br>
-        <input type="radio" name="q7" value="Iron"> Iron<br>
-      </div>
-
-      <div class="question">
-        <p>8. How many bones are in the adult human body?</p>
-        <input type="radio" name="q8" value="206"> 206<br>
-        <input type="radio" name="q8" value="305"> 305<br>
-        <input type="radio" name="q8" value="102"> 102<br>
-      </div>
-
-      <div class="question">
-        <p>9. What force keeps us grounded on Earth?</p>
-        <input type="radio" name="q9" value="Magnetism"> Magnetism<br>
-        <input type="radio" name="q9" value="Gravity"> Gravity<br>
-        <input type="radio" name="q9" value="Friction"> Friction<br>
-      </div>
-
-      <div class="question">
-        <p>10. What is the main gas found in the air we breathe?</p>
-        <input type="radio" name="q10" value="Oxygen"> Oxygen<br>
-        <input type="radio" name="q10" value="Carbon Dioxide"> Carbon Dioxide<br>
-        <input type="radio" name="q10" value="Nitrogen"> Nitrogen<br>
-      </div>
-
-      <button type="button" onclick="submitQuiz()">Submit</button>
-    </form>
-
-    <div id="certificate-section" style="display: none;">
-      <h2>Congratulations!</h2>
-      <p>Please enter your name to generate your certificate:</p>
-      <input type="text" id="user-name" placeholder="Enter your name">
-      <button type="button" onclick="generateCertificate()">Generate Certificate</button>
+    <div class="container">
+        <h1>Quick Science Quiz</h1>
+        <div id="quiz-container">
+            <div id="question-container">
+                <h2 id="question">Question will go here</h2>
+                <div id="options-container">
+                    <!-- Options will be dynamically added here -->
+                </div>
+            </div>
+            <div id="timer-container">
+                <span id="timer">10</span> seconds left
+            </div>
+            <button id="next-button" class="hidden">Next Question</button>
+        </div>
     </div>
-
-    <canvas id="certificate-canvas" style="display:none;"></canvas>
-    <a id="download-link" href="#" style="display:none;">Download Certificate</a>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
