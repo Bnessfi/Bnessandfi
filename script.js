@@ -1,79 +1,102 @@
-function submitQuiz() {
-  const totalQuestions = 10;
-  let correctAnswers = 0;
+const questions = [
+    {
+        question: "What is the chemical symbol for water?",
+        options: ["H2O", "O2", "CO2", "NaCl"],
+        answer: "H2O"
+    },
+    {
+        question: "What planet is known as the Red Planet?",
+        options: ["Earth", "Mars", "Jupiter", "Venus"],
+        answer: "Mars"
+    },
+    {
+        question: "What is the powerhouse of the cell?",
+        options: ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic Reticulum"],
+        answer: "Mitochondria"
+    },
+    {
+        question: "What gas do plants absorb from the atmosphere?",
+        options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+        answer: "Carbon Dioxide"
+    },
+    {
+        question: "What is the main component of the Earth's atmosphere?",
+        options: ["Oxygen", "Hydrogen", "Nitrogen", "Carbon Dioxide"],
+        answer: "Nitrogen"
+    },
+];
 
-  // Correct answers
-  const answers = {
-    q1: "H2O",
-    q2: "Mars",
-    q3: "Mitochondria",
-    q4: "Carbon Dioxide",
-    q5: "100°C",
-    q6: "Leaves",
-    q7: "Diamond",
-    q8: "206",
-    q9: "Gravity",
-    q10: "Nitrogen"
-  };
+let currentQuestionIndex = 0;
+let timer;
+let timeLeft = 10;
 
-  const form = document.getElementById('quiz-form');
-  for (let i = 1; i <= totalQuestions; i++) {
-    const question = form[`q${i}`];
-    if (question) {
-      const selectedOption = form[`q${i}`].value;
-      if (selectedOption === answers[`q${i}`]) {
-        correctAnswers++;
-      }
+const questionElement = document.getElementById('question');
+const optionsContainer = document.getElementById('options-container');
+const timerElement = document.getElementById('timer');
+const nextButton = document.getElementById('next-button');
+
+function startQuiz() {
+    currentQuestionIndex = 0;
+    showQuestion();
+}
+
+function showQuestion() {
+    resetState();
+    const currentQuestion = questions[currentQuestionIndex];
+    questionElement.innerText = currentQuestion.question;
+
+    currentQuestion.options.forEach(option => {
+        const button = document.createElement('button');
+        button.innerText = option;
+        button.classList.add('option');
+        button.addEventListener('click', () => selectOption(option));
+        optionsContainer.appendChild(button);
+    });
+
+    startTimer();
+}
+
+function resetState() {
+    clearInterval(timer);
+    optionsContainer.innerHTML = '';
+    nextButton.classList.add('hidden');
+    timeLeft = 10;
+    timerElement.innerText = timeLeft;
+}
+
+function selectOption(selectedOption) {
+    clearInterval(timer);
+    const correctAnswer = questions[currentQuestionIndex].answer;
+    
+    if (selectedOption === correctAnswer) {
+        alert("Correct!");
+    } else {
+        alert("Wrong! The correct answer was: " + correctAnswer);
     }
-  }
 
-  alert(`You got ${correctAnswers} out of ${totalQuestions} correct!`);
-
-  // Hide the quiz, show the certificate input section
-  document.getElementById('quiz-form').style.display = 'none';
-  document.getElementById('certificate-section').style.display = 'block';
+    // Show next button after answering
+    nextButton.classList.remove('hidden');
+    nextButton.onclick = () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion();
+        } else {
+            alert("Quiz finished!");
+            currentQuestionIndex = 0; // Reset for next time
+            startQuiz();
+        }
+    };
 }
 
-function generateCertificate() {
-  const userName = document.getElementById('user-name').value;
-
-  if (userName.trim() === "") {
-    alert("Please enter your name to generate the certificate.");
-    return;
-  }
-
-  const canvas = document.getElementById('certificate-canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = 800;
-  canvas.height = 600;
-
-  // Set canvas background color
-  ctx.fillStyle = "#f5f5f5";  // Light gray background
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Draw certificate border
-  ctx.strokeStyle = "#000";
-  ctx.lineWidth = 5;
-  ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
-
-  // Certificate title
-  ctx.font = "40px Arial";
-  ctx.fillStyle = "#000";
-  ctx.textAlign = "center";
-  ctx.fillText("Certificate of Completion", canvas.width / 2, 150);
-
-  // User's name
-  ctx.font = "30px Arial";
-  ctx.fillText(userName, canvas.width / 2, 300);
-
-  // Additional text
-  ctx.font = "20px Arial";
-  ctx.fillText("has successfully completed the Science Quiz", canvas.width / 2, 350);
-  ctx.fillText("Congratulations!", canvas.width / 2, 400);
-
-  // Show download link
-  const downloadLink = document.getElementById('download-link');
-  downloadLink.href = canvas.toDataURL("image/png");
-  downloadLink.download = "certificate.png";
-  downloadLink.style.display = "block";
+function startTimer() {
+    timer = setInterval(() => {
+        timeLeft--;
+        timerElement.innerText = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            selectOption(""); // Trigger the selectOption function to handle time up
+        }
+    }, 1000);
 }
+
+startQuiz();
