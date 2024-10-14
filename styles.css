@@ -1,75 +1,64 @@
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
+  text-align: center;
 }
 
-.todo-container {
-    width: 300px;
-    margin: 100px auto;
-    text-align: center;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+#quiz-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
+  font-size: 36px;
+  color: #4CAF50;
 }
 
-input[type="text"] {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.question {
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+#certificate-section {
+  margin-top: 20px;
 }
 
-li {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
+#certificate-section input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-li span {
-    flex-grow: 1;
+#download-link {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
-li button {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-li button:hover {
-    background-color: #d32f2f;
+#download-link:hover {
+  background-color: #45a049;
 }
