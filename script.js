@@ -1,29 +1,29 @@
-// Array of quiz questions about gender in French
+// Array of quiz questions on Introduction to Law
 const questions = [
     {
-        question: "Is the word 'maison' masculine or feminine?",
-        options: ["Masculine", "Feminine"],
-        answer: "Feminine"
+        question: "What is the highest law of the land?",
+        options: ["Statute Law", "Common Law", "Constitution"],
+        answer: "Constitution"
     },
     {
-        question: "Is the word 'chien' masculine or feminine?",
-        options: ["Masculine", "Feminine"],
-        answer: "Masculine"
+        question: "What type of law governs relationships between individuals?",
+        options: ["Criminal Law", "Civil Law", "Administrative Law"],
+        answer: "Civil Law"
     },
     {
-        question: "Is the word 'table' masculine or feminine?",
-        options: ["Masculine", "Feminine"],
-        answer: "Feminine"
+        question: "Who is responsible for making laws?",
+        options: ["Judges", "Legislature", "Police"],
+        answer: "Legislature"
     },
     {
-        question: "Is the word 'livre' masculine or feminine?",
-        options: ["Masculine", "Feminine"],
-        answer: "Masculine"
+        question: "What is the term for a law that is enacted by a legislature?",
+        options: ["Regulation", "Statute", "Ordinance"],
+        answer: "Statute"
     },
     {
-        question: "Is the word 'voiture' masculine or feminine?",
-        options: ["Masculine", "Feminine"],
-        answer: "Feminine"
+        question: "Which of the following is not a source of law?",
+        options: ["Custom", "Constitution", "Religion"],
+        answer: "Religion"
     }
 ];
 
