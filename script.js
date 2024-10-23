@@ -1,29 +1,29 @@
-// Array of quiz questions
+// Array of quiz questions about gender in French
 const questions = [
     {
-        question: "What is the chemical symbol for water?",
-        options: ["H2O", "O2", "CO2", "NaCl"],
-        answer: "H2O"
+        question: "Is the word 'maison' masculine or feminine?",
+        options: ["Masculine", "Feminine"],
+        answer: "Feminine"
     },
     {
-        question: "What planet is known as the Red Planet?",
-        options: ["Earth", "Mars", "Jupiter", "Venus"],
-        answer: "Mars"
+        question: "Is the word 'chien' masculine or feminine?",
+        options: ["Masculine", "Feminine"],
+        answer: "Masculine"
     },
     {
-        question: "What is the powerhouse of the cell?",
-        options: ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic Reticulum"],
-        answer: "Mitochondria"
+        question: "Is the word 'table' masculine or feminine?",
+        options: ["Masculine", "Feminine"],
+        answer: "Feminine"
     },
     {
-        question: "What gas do plants absorb from the atmosphere?",
-        options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
-        answer: "Carbon Dioxide"
+        question: "Is the word 'livre' masculine or feminine?",
+        options: ["Masculine", "Feminine"],
+        answer: "Masculine"
     },
     {
-        question: "What is the main component of the Earth's atmosphere?",
-        options: ["Oxygen", "Hydrogen", "Nitrogen", "Carbon Dioxide"],
-        answer: "Nitrogen"
+        question: "Is the word 'voiture' masculine or feminine?",
+        options: ["Masculine", "Feminine"],
+        answer: "Feminine"
     }
 ];
 
@@ -31,6 +31,7 @@ let currentQuestionIndex = 0;
 let timer;
 let timeLeft = 10;
 
+// Select DOM elements
 const questionElement = document.getElementById('question');
 const optionsContainer = document.getElementById('options-container');
 const timerElement = document.getElementById('timer');
@@ -62,15 +63,15 @@ function showQuestion() {
 // Reset the state for the next question
 function resetState() {
     clearInterval(timer);
-    optionsContainer.innerHTML = '';
-    nextButton.classList.add('hidden');
+    optionsContainer.innerHTML = '';  // Clear previous options
+    nextButton.classList.add('hidden');  // Hide next button until the question is answered
     timeLeft = 10;
-    timerElement.innerText = timeLeft;
+    timerElement.innerText = timeLeft;  // Reset timer
 }
 
 // Handle option selection
 function selectOption(selectedOption) {
-    clearInterval(timer);
+    clearInterval(timer);  // Stop the timer when an option is selected
     const correctAnswer = questions[currentQuestionIndex].answer;
 
     // Disable all options after selecting an answer
@@ -92,11 +93,10 @@ function selectOption(selectedOption) {
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
-        showQuestion();
+        showQuestion();  // Load next question
     } else {
         alert("Quiz finished!");
-        currentQuestionIndex = 0; // Reset for next time
-        startQuiz();
+        nextButton.classList.add('hidden');  // Hide the button after quiz completion
     }
 });
 
@@ -104,10 +104,10 @@ nextButton.addEventListener('click', () => {
 function startTimer() {
     timer = setInterval(() => {
         timeLeft--;
-        timerElement.innerText = timeLeft;
+        timerElement.innerText = timeLeft;  // Update the timer display
         if (timeLeft <= 0) {
             clearInterval(timer);
-            selectOption(""); // Trigger the selectOption function to handle time running out
+            selectOption("");  // If time runs out, force submission
         }
     }, 1000);
 }
