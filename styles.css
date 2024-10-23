@@ -7,11 +7,12 @@
 
 body {
     font-family: 'Helvetica Neue', sans-serif;
-    background: linear-gradient(135deg, #2f80ed, #56ccf2);
+    background: linear-gradient(135deg, #f39c12, #f1c40f);
     color: #333;
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -53,7 +54,7 @@ h1 {
 #question {
     font-size: 1.5rem;
     margin-bottom: 20px;
-    color: #007BFF;
+    color: #e74c3c;
 }
 
 #options-container {
@@ -62,9 +63,8 @@ h1 {
     gap: 10px;
 }
 
-/* Button (option) styles */
 .option {
-    background: #2d9cdb;
+    background: #e67e22;
     color: #fff;
     padding: 12px;
     border: none;
@@ -75,7 +75,7 @@ h1 {
 }
 
 .option:hover {
-    background: #2f80ed;
+    background: #d35400;
     transform: scale(1.05);
 }
 
@@ -84,11 +84,10 @@ h1 {
     cursor: not-allowed;
 }
 
-/* Timer and next button */
 #timer-container {
     font-size: 1.2rem;
     margin-top: 20px;
-    color: #eb5757;
+    color: #e74c3c;
     font-weight: bold;
 }
 
@@ -105,13 +104,51 @@ h1 {
 }
 
 #next-button:hover {
-    background: #219653;
+    background: #229954;
     transform: scale(1.05);
 }
 
 #next-button:disabled {
     background: #95a5a6;
     cursor: not-allowed;
+}
+
+/* Donate Section Styles */
+.donate-section {
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    margin: 30px 0;
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.donate-section h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.donate-section p {
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.donate-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wave-logo {
+    max-width: 80px;
+    margin-bottom: 10px;
+}
+
+.donate-info p {
+    font-size: 1.2rem;
+    color: #2c3e50;
 }
 
 /* Responsive Design */
