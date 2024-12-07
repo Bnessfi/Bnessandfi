@@ -2201,9 +2201,10 @@ function checkAnswers() {
         }
     });
 
-    // Replace the score display code with this:
+    // Create and show the score popup
     const scorePopup = document.createElement('div');
     scorePopup.className = 'score-popup';
+    scorePopup.style.display = 'block'; // Add this line to show the popup
     
     const scorePopupContent = document.createElement('div');
     scorePopupContent.className = 'score-popup-content';
