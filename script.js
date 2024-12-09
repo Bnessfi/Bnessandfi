@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Script is running');
+    
     // Dropdown topics
     const mathematicsTopics = [
         'Algebra', 
@@ -16,6 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Populate all dropdowns
     ['topicsDropdown1', 'topicsDropdown2', 'topicsDropdown3'].forEach(function(dropdownId) {
         const dropdown = document.getElementById(dropdownId);
+        console.log(`Dropdown ${dropdownId}:`, dropdown);
+        if (!dropdown) {
+            console.error(`Dropdown ${dropdownId} not found!`);
+            return;
+        }
         // Clear existing content
         dropdown.innerHTML = '';
         
