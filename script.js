@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Topics dropdown logic
     var mathematicsTopics = [
         'Algebra', 
         'Geometry', 
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdownContent.appendChild(topicLink);
     });
 
+    // Smooth scrolling
     var smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
     smoothScrollLinks.forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
@@ -31,5 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
+    });
+
+    // Hamburger menu toggle
+    var hamburgerMenu = document.getElementById('hamburgerMenu');
+    var navLinks = document.getElementById('navLinks');
+    hamburgerMenu.addEventListener('click', function() {
+        navLinks.classList.toggle('show');
     });
 });
