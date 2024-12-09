@@ -1,44 +1,62 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Topics dropdown logic
-    var mathematicsTopics = [
-        'Algebra', 
-        'Geometry', 
-        'Arithmetic', 
-        'Trigonometry', 
-        'Calculus', 
-        'Statistics and Probability', 
-        'Linear Algebra', 
-        'Discrete Mathematics', 
-        'Number Theory', 
-        'Financial Mathematics'
-    ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Genius Academy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Math Genius Academy</div>
+        <button class="hamburger" id="hamburgerMenu">&#9776;</button>
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <a href="#video-lectures">Video Lectures ▼</a>
+                <div class="dropdown-content" id="topicsDropdown1">
+                    <!-- Topics dynamically added -->
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#test-speed">Test Your Speed ▼</a>
+                <div class="dropdown-content" id="topicsDropdown2">
+                    <!-- Topics dynamically added -->
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#downloads">Downloadable Resources ▼</a>
+                <div class="dropdown-content" id="topicsDropdown3">
+                    <!-- Topics dynamically added -->
+                </div>
+            </div>
+            <a href="https://mathpremiumquiz.github.io/Mathpremiumquiz/" target="_blank">Practice Questions</a>
+        </div>
+    </nav>
 
-    var dropdownContent = document.getElementById('topicsDropdown');
-    mathematicsTopics.forEach(function(topic) {
-        var topicLink = document.createElement('a');
-        topicLink.href = '#' + topic.toLowerCase().replace(/\s+/g, '-');
-        topicLink.textContent = topic;
-        dropdownContent.appendChild(topicLink);
-    });
+    <div class="container">
+        <h1>Welcome to Math Genius Academy</h1>
+        <p>Your comprehensive online mathematics learning platform. Explore various mathematical disciplines with expert-curated content.</p>
+        
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h2>Personalized Learning</h2>
+                <p>Tailored mathematical learning paths for students of all levels.</p>
+            </div>
+            <div class="feature-box">
+                <h2>Expert Tutors</h2>
+                <p>Learn from experienced mathematicians and educators.</p>
+            </div>
+            <div class="feature-box">
+                <h2>Interactive Content</h2>
+                <p>Engaging video lectures, quizzes, and downloadable resources.</p>
+            </div>
+        </div>
+    </div>
 
-    // Smooth scrolling
-    var smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
-    smoothScrollLinks.forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            var targetElement = document.querySelector(this.getAttribute('href'));
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+    <footer class="footer">
+        <p>&copy; 2024 Math Genius Academy. All Rights Reserved.</p>
+    </footer>
 
-    // Hamburger menu toggle
-    var hamburgerMenu = document.getElementById('hamburgerMenu');
-    var navLinks = document.getElementById('navLinks');
-    hamburgerMenu.addEventListener('click', function() {
-        navLinks.classList.toggle('show');
-    });
-});
+    <script src="scripts.js"></script>
+</body>
+</html>
