@@ -3,94 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathematics Quiz</title>
+    <title>Math Genius Academy</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Mathematics Quiz</h1>
-        <select class="topic-select" id="topicSelect">
-            <option value="">Select a Topic</option>
-            <option value="Algebra">Algebra</option>
-            <option value="Geometry">Geometry</option>
-            <option value="Arithmetic">Arithmetic</option>
-        </select>
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-text" id="progressText">Questions Answered: 0/5</div>
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <div id="quizContainer" class="quiz-container"></div>
-
-        <section id="donate" class="donate-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <div class="donation-section">
-                            <h2 class="donation-title">Over 90% of children in sub-Saharan Africa can't read or solve basic math by age 10.</h2>
-                            
-                            <div class="donation-image-container">
-                                <img 
-                                    src="https://www.educationcannotwait.org/sites/default/files/styles/de2e_standard/public/2022-03/DRC_banner%20%281%29.jpg?h=d2de68a6&itok=BMQy3knl"
-                                    alt="Children in classroom in DRC" 
-                                    class="donation-image"
-                                    loading="lazy"
-                                />
-                            </div>
-                            
-                            <p class="donation-description">Worse still, over 75% of Africans have no access to free online tutoring or educational resources. Your support can change this. Donate today to help us provide free learning tools and unlock the potential of millions of bright young minds.</p>
-                            
-                            <!-- Wave Donation Option -->
-                            <div class="donation-method">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX1j8_1o20igEk7AJyDYrJ_cH3dBXBr6jwuw&usqp=CAU" alt="Wave Logo" class="wave-logo">
-                                <div class="donation-info">
-                                    <p>Wave Phone Number: <strong>+220 3709558</strong></p>
-                                    <button class="copy-btn" data-number="+220 3709558">Copy Number</button>
-                                </div>
-                            </div>
-                            
-                            <!-- GTBank Donation Option -->
-                            <div class="donation-method">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/GTBank_logo.svg/2048px-GTBank_logo.svg.png" alt="GTBank Logo" class="gtbank-logo">
-                                <div class="donation-info">
-                                    <p>GTBank Account Number: <strong>2032202001590</strong></p>
-                                    <button class="copy-btn" data-number="2032202001590">Copy Number</button>
-                                </div>
-                            </div>
-                            
-                            <div class="donation-footer">
-                                <p class="thank-you-note">Thank you for your support! ❤️</p>
-                            </div>
-                        </div>
-                    </div>
+    <nav class="navbar">
+        <div class="logo">Math Genius Academy</div>
+        <div class="nav-links">
+            <div class="dropdown">
+                <button class="dropdown-btn">Mathematics Topics ▼</button>
+                <div class="dropdown-content" id="topicsDropdown">
+                    <!-- Topics will be dynamically added by JavaScript -->
                 </div>
             </div>
-        </section>
-    </div>
-    <script src="script.js"></script>
-    <!-- Telegram Popup -->
-    <div class="telegram-popup" id="telegramPopup">
-        <div class="popup-content">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
-            
-            <div class="popup-header">
-                <img src="https://logos-world.net/wp-content/uploads/2021/03/Telegram-Symbol.png" alt="Telegram Logo" class="telegram-logo">
-                <h2>🚨 Limited Time Access! 🚨</h2>
-            </div>
+            <a href="#video-lectures">Video Lectures</a>
+            <a href="https://mathpremiumquiz.github.io/Mathpremiumquiz/" target="_blank">Practice Questions</a>
+            <a href="#test-speed">Test Your Speed</a>
+            <a href="#downloads">Downloadable Resources</a>
+        </div>
+    </nav>
 
-            <div class="popup-body">
-                <p class="urgent-msg">⚠️ Our Telegram group is closing in less than 24 hours!</p>
-                <p>Join our exclusive Telegram channel to access:</p>
-                <ul>
-                    <li>📚 Free Video Lectures</li>
-                    <li>📝 Study Materials</li>
-                    <li>👥 Community Support</li>
-                    <li>🎯 Practice Problems</li>
-                </ul>
-                <a href="https://t.me/mathhub101" class="join-btn" target="_blank">
-                    Join Now Before It's Too Late!
-                </a>
+    <div class="container">
+        <h1>Welcome to Math Genius Academy</h1>
+        <p>Your comprehensive online mathematics learning platform. Explore various mathematical disciplines with expert-curated content.</p>
+        
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h2>Personalized Learning</h2>
+                <p>Tailored mathematical learning paths for students of all levels.</p>
+            </div>
+            <div class="feature-box">
+                <h2>Expert Tutors</h2>
+                <p>Learn from experienced mathematicians and educators.</p>
+            </div>
+            <div class="feature-box">
+                <h2>Interactive Content</h2>
+                <p>Engaging video lectures, quizzes, and downloadable resources.</p>
             </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Math Genius Academy. All Rights Reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
