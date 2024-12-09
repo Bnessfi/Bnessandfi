@@ -1,55 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script is running');
+    // Add event listeners to all select elements
+    const selects = document.querySelectorAll('.dropdown-select');
     
-    // Dropdown topics
-    const mathematicsTopics = [
-        'Algebra', 
-        'Geometry', 
-        'Arithmetic', 
-        'Trigonometry', 
-        'Calculus', 
-        'Statistics and Probability', 
-        'Linear Algebra', 
-        'Discrete Mathematics', 
-        'Number Theory', 
-        'Financial Mathematics'
-    ];
-
-    // Populate all dropdowns
-    ['topicsDropdown1', 'topicsDropdown2', 'topicsDropdown3'].forEach(function(dropdownId) {
-        const dropdown = document.getElementById(dropdownId);
-        console.log(`Dropdown ${dropdownId}:`, dropdown);
-        if (!dropdown) {
-            console.error(`Dropdown ${dropdownId} not found!`);
-            return;
-        }
-        // Clear existing content
-        dropdown.innerHTML = '';
-        
-        // Add topics
-        mathematicsTopics.forEach(function(topic) {
-            const topicLink = document.createElement('a');
-            topicLink.href = '#' + topic.toLowerCase().replace(/\s+/g, '-');
-            topicLink.textContent = topic;
+    selects.forEach(select => {
+        select.addEventListener('change', function(e) {
+            const selectedTopic = e.target.value;
+            const selectId = e.target.id;
             
-            // Add click event listener
-            topicLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                // You can add specific functionality for each section here
-                const parentDropdown = dropdown.id;
-                if (parentDropdown === 'topicsDropdown1') {
-                    // Handle Video Lectures selection
-                    console.log('Video Lecture selected:', topic);
-                } else if (parentDropdown === 'topicsDropdown2') {
-                    // Handle Test Your Speed selection
-                    console.log('Speed Test selected:', topic);
-                } else if (parentDropdown === 'topicsDropdown3') {
-                    // Handle Downloadable Resources selection
-                    console.log('Resource selected:', topic);
-                }
-            });
-            
-            dropdown.appendChild(topicLink);
+            // Handle the selection based on which dropdown was used
+            switch(selectId) {
+                case 'videoLectures':
+                    console.log('Video Lecture selected:', selectedTopic);
+                    // Add your video lecture logic here
+                    break;
+                case 'speedTest':
+                    console.log('Speed Test selected:', selectedTopic);
+                    // Add your speed test logic here
+                    break;
+                case 'resources':
+                    console.log('Resource selected:', selectedTopic);
+                    // Add your resources logic here
+                    break;
+            }
         });
     });
 
