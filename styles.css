@@ -48,14 +48,6 @@ body {
     position: relative;
 }
 
-.dropdown-btn {
-    cursor: pointer;
-    background-color: #3498db;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-}
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -167,9 +159,5 @@ body {
 
     .logo {
         font-size: 1.2rem;
-    }
-
-    .dropdown-btn {
-        width: 100%;
     }
 }
