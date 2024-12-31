@@ -1,34 +1,51 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Add event listeners to all select elements
-    const selects = document.querySelectorAll('.dropdown-select');
-    
-    selects.forEach(select => {
-        select.addEventListener('change', function(e) {
-            const selectedTopic = e.target.value;
-            const selectId = e.target.id;
-            
-            // Handle the selection based on which dropdown was used
-            switch(selectId) {
-                case 'videoLectures':
-                    console.log('Video Lecture selected:', selectedTopic);
-                    // Add your video lecture logic here
-                    break;
-                case 'speedTest':
-                    console.log('Speed Test selected:', selectedTopic);
-                    // Add your speed test logic here
-                    break;
-                case 'resources':
-                    console.log('Resource selected:', selectedTopic);
-                    // Add your resources logic here
-                    break;
-            }
-        });
-    });
+// Countdown Timer
+function updateCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    let [hours, minutes, seconds] = countdownElement.textContent.split(':').map(Number);
 
-    // Hamburger menu toggle
-    const hamburgerMenu = document.getElementById('hamburgerMenu');
-    const navLinks = document.getElementById('navLinks');
-    hamburgerMenu.addEventListener('click', function() {
-        navLinks.classList.toggle('show');
-    });
+    if (seconds > 0) {
+        seconds--;
+    } else {
+        if (minutes > 0) {
+            minutes--;
+            seconds = 59;
+        } else if (hours > 0) {
+            hours--;
+            minutes = 59;
+            seconds = 59;
+        }
+    }
+
+    countdownElement.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+    if (hours === 0 && minutes === 0 && seconds === 0) {
+        clearInterval(timerInterval);
+        alert('Offer has expired!');
+    }
+}
+
+const timerInterval = setInterval(updateCountdown, 1000);
+
+// User Agreement Handling
+const checkbox = document.getElementById('userAgreement');
+const buyButton = document.getElementById('premiumBuyButton');
+const errorMessage = document.getElementById('agreementError');
+
+checkbox.addEventListener('change', function () {
+    if (this.checked) {
+        buyButton.classList.remove('disabled');
+        errorMessage.style.display = 'none';
+    } else {
+        buyButton.classList.add('disabled');
+    }
+});
+
+buyButton.addEventListener('click', function (e) {
+    if (!checkbox.checked) {
+        e.preventDefault();
+        errorMessage.style.display = 'block';
+        return;
+    }
+    errorMessage.style.display = 'none';
+    alert('Proceeding to checkout...');
 });
