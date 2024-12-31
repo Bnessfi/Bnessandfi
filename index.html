@@ -3,94 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Genius Academy</title>
+    <title>Math Tutoring Pricing</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="mobile-notice" id="mobileNotice">
-        📱 For the best experience, please rotate your device to landscape mode.
-        <button class="notice-close" onclick="this.parentElement.style.display='none'">×</button>
+    <div class="timer-container">
+        <h2>Special Offer Ends In:</h2>
+        <div id="countdown">16:37:12</div>
+        <p>Hurry! Prices will return to original in less than 24 hours!</p>
     </div>
-    <nav class="navbar">
-        <div class="logo">Math Genius Academy</div>
-        <button class="hamburger" id="hamburgerMenu">&#9776;</button>
-        <div class="nav-links" id="navLinks">
-            <div class="dropdown">
-                <label for="videoLectures">Video Lectures</label>
-                <select id="videoLectures" class="dropdown-select">
-                    <option value="" disabled selected>Select Topic</option>
-                    <option value="algebra">Algebra</option>
-                    <option value="geometry">Geometry</option>
-                    <option value="arithmetic">Arithmetic</option>
-                    <option value="trigonometry">Trigonometry</option>
-                    <option value="calculus">Calculus</option>
-                    <option value="statistics">Statistics and Probability</option>
-                    <option value="linear-algebra">Linear Algebra</option>
-                    <option value="discrete-mathematics">Discrete Mathematics</option>
-                    <option value="number-theory">Number Theory</option>
-                    <option value="financial-mathematics">Financial Mathematics</option>
-                </select>
-            </div>
-            <div class="dropdown">
-                <label for="speedTest">Test Your Speed</label>
-                <select id="speedTest" class="dropdown-select">
-                    <option value="" disabled selected>Select Topic</option>
-                    <option value="algebra">Algebra</option>
-                    <option value="geometry">Geometry</option>
-                    <option value="arithmetic">Arithmetic</option>
-                    <option value="trigonometry">Trigonometry</option>
-                    <option value="calculus">Calculus</option>
-                    <option value="statistics">Statistics and Probability</option>
-                    <option value="linear-algebra">Linear Algebra</option>
-                    <option value="discrete-mathematics">Discrete Mathematics</option>
-                    <option value="number-theory">Number Theory</option>
-                    <option value="financial-mathematics">Financial Mathematics</option>
-                </select>
-            </div>
-            <div class="dropdown">
-                <label for="resources">Downloadable Resources</label>
-                <select id="resources" class="dropdown-select">
-                    <option value="" disabled selected>Select Topic</option>
-                    <option value="algebra">Algebra</option>
-                    <option value="geometry">Geometry</option>
-                    <option value="arithmetic">Arithmetic</option>
-                    <option value="trigonometry">Trigonometry</option>
-                    <option value="calculus">Calculus</option>
-                    <option value="statistics">Statistics and Probability</option>
-                    <option value="linear-algebra">Linear Algebra</option>
-                    <option value="discrete-mathematics">Discrete Mathematics</option>
-                    <option value="number-theory">Number Theory</option>
-                    <option value="financial-mathematics">Financial Mathematics</option>
-                </select>
-            </div>
-            <a href="https://mathpremiumquiz.github.io/Mathpremiumquiz/" target="_blank">Practice Questions</a>
-        </div>
-    </nav>
 
-    <div class="container">
-        <h1>Welcome to Math Genius Academy</h1>
-        <p>Your comprehensive online mathematics learning platform. Explore various mathematical disciplines with expert-curated content.</p>
-        
-        <div class="feature-grid">
-            <div class="feature-box">
-                <h2>Personalized Learning</h2>
-                <p>Tailored mathematical learning paths for students of all levels.</p>
+    <div class="pricing-container">
+        <div class="pricing-card">
+            <div class="price-header">
+                <h2>Basic Package</h2>
+                <div class="original-price">$19.99</div>
+                <div class="price">$9.99</div>
+                <p>One-time payment</p>
             </div>
-            <div class="feature-box">
-                <h2>Expert Tutors</h2>
-                <p>Learn from experienced mathematicians and educators.</p>
+            <ul class="feature-list">
+                <li class="all-topics">All Math Topics</li>
+                <li>Access to Practice Questions</li>
+                <li>Self-paced Learning</li>
+                <li>Basic Progress Tracking</li>
+            </ul>
+            <a href="https://paymentguide.github.io/9.99/" class="btn">BUY NOW</a>
+        </div>
+
+        <div class="pricing-card">
+            <div class="price-header">
+                <h2>Standard Package</h2>
+                <div class="original-price">$49.99</div>
+                <div class="price">$19.99</div>
+                <p>One-time payment</p>
             </div>
-            <div class="feature-box">
-                <h2>Interactive Content</h2>
-                <p>Engaging video lectures, quizzes, and downloadable resources.</p>
+            <ul class="feature-list">
+                <li class="all-topics">All Math Topics</li>
+                <li>All Basic Package Features</li>
+                <li>Math Speed Test Section</li>
+                <li>Performance Analytics</li>
+                <li>Progress Reports</li>
+            </ul>
+            <a href="https://paymentguide.github.io/19.99/" class="btn">BUY NOW</a>
+        </div>
+
+        <div class="pricing-card highlight">
+            <div class="price-header">
+                <h2>Premium Package</h2>
+                <div class="original-price">$149.99</div>
+                <div class="price">$99.99</div>
+                <p>One-time payment</p>
             </div>
+            <ul class="feature-list">
+                <li class="all-topics">All Math Topics</li>
+                <li>All Standard Package Features</li>
+                <li>Video Lectures</li>
+                <li>Downloadable Resources</li>
+                <li>Math Speed Test Section</li>
+                <li>Advanced Analytics</li>
+                <li>Priority Support</li>
+            </ul>
+            <div class="agreement-container">
+                <input type="checkbox" id="userAgreement">
+                <div class="terms-container">
+                    <label for="userAgreement" class="agreement-text">I READ AND AGREED TO THE TERMS</label>
+                    <a href="https://paymentguide.github.io/TERMSANDCONDITIONS/" target="_blank" class="view-terms">click here to view user agreement details</a>
+                </div>
+            </div>
+            <div class="error-message" id="agreementError">ACCEPT USER AGREEMENT TO CONTINUE</div>
+            <a href="https://paymentguide.github.io/paymentguide/" class="btn disabled" id="premiumBuyButton">BUY NOW</a>
         </div>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2024 Math Genius Academy. All Rights Reserved.</p>
-    </footer>
-
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
