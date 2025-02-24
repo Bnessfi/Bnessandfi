@@ -9,6 +9,7 @@
             --primary-color: #3498db;
             --secondary-color: #2ecc71;
             --accent-color: #e74c3c;
+            --warning-color: #f39c12;
             --dark-color: #2c3e50;
             --light-color: #ecf0f1;
         }
@@ -139,10 +140,33 @@
             display: none;
         }
 
-        .upgrade-message button {
+        .warning-message {
+            background-color: var(--warning-color);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            display: none;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(243, 156, 18, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
+        }
+
+        .upgrade-message button, .warning-message button {
             background-color: white;
             color: var(--accent-color);
             margin-top: 10px;
+        }
+
+        .warning-message button {
+            color: var(--warning-color);
         }
 
         .message {
@@ -162,12 +186,98 @@
             color: #2ecc71;
         }
 
+        .warning {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: #f39c12;
+        }
+
         footer {
             text-align: center;
             margin-top: 30px;
             padding: 15px;
             color: #7f8c8d;
             font-size: 14px;
+        }
+
+        /* Verification panel */
+        .verification-panel {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .verification-panel h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .keyword-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .keyword-tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .verification-panel .progress {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .verification-panel .progress-bar {
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .verification-result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .verification-passed {
+            color: var(--secondary-color);
+        }
+
+        .verification-failed {
+            color: var(--accent-color);
+        }
+
+        /* YouTube Video Title */
+        .youtube-video-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Loader */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -208,13 +318,35 @@
             <button id="dismissUpgrade">Dismiss</button>
         </div>
 
+        <div id="warningMessage" class="warning-message">
+            <p>⚠️ WARNING: This video is not related to the selected topic! ⚠️</p>
+            <p>Please select a video that is relevant to <span id="requiredTopic"></span>.</p>
+            <button id="dismissWarning">Dismiss</button>
+        </div>
+
+        <div id="loader" class="loader"></div>
+
         <div id="messageContainer" class="message" style="display: none;"></div>
 
         <div id="videoContainer">
-            <h2 id="videoTitle"></h2>
+            <h2 id="videoTitle" class="youtube-video-title"></h2>
             <div class="video-wrapper">
                 <iframe id="videoFrame" allowfullscreen></iframe>
             </div>
+            
+            <div id="verificationPanel" class="verification-panel">
+                <h3>Topic Verification</h3>
+                <p>Checking if video is related to <strong id="selectedTopicDisplay"></strong>...</p>
+                
+                <div class="keyword-list" id="keywordList"></div>
+                
+                <div class="progress">
+                    <div class="progress-bar" id="verificationProgress" style="width: 0%"></div>
+                </div>
+                
+                <div class="verification-result" id="verificationResult"></div>
+            </div>
+            
             <div class="video-details">
                 <p id="videoDescription"></p>
             </div>
@@ -233,21 +365,32 @@
         const loadVideoBtn = document.getElementById('loadVideo');
         const upgradeMessage = document.getElementById('upgradeMessage');
         const dismissUpgradeBtn = document.getElementById('dismissUpgrade');
+        const warningMessage = document.getElementById('warningMessage');
+        const dismissWarningBtn = document.getElementById('dismissWarning');
+        const requiredTopic = document.getElementById('requiredTopic');
         const videoContainer = document.getElementById('videoContainer');
         const videoFrame = document.getElementById('videoFrame');
         const videoTitle = document.getElementById('videoTitle');
         const videoDescription = document.getElementById('videoDescription');
         const messageContainer = document.getElementById('messageContainer');
+        const loader = document.getElementById('loader');
+        const selectedTopicDisplay = document.getElementById('selectedTopicDisplay');
+        const keywordList = document.getElementById('keywordList');
+        const verificationProgress = document.getElementById('verificationProgress');
+        const verificationResult = document.getElementById('verificationResult');
 
         // List of available topics
         const availableTopics = ['civil', 'mechanical', 'electrical'];
         
         // Topic-specific keywords to validate video content
         const topicKeywords = {
-            civil: ["civil engineering", "construction", "structural", "bridge", "building", "concrete", "infrastructure", "foundation", "architecture", "surveying"],
-            mechanical: ["mechanical engineering", "thermodynamics", "fluid mechanics", "machine design", "robotics", "manufacturing", "HVAC", "automotive", "turbine", "engine"],
-            electrical: ["electrical engineering", "circuit", "power", "electronic", "microcontroller", "transformer", "motor", "generator", "signal processing", "control systems"]
+            civil: ["civil engineering", "construction", "structural", "bridge", "building", "concrete", "infrastructure", "foundation", "architecture", "surveying", "geotechnical", "transportation engineering", "highway", "urban planning", "water resources"],
+            mechanical: ["mechanical engineering", "thermodynamics", "fluid mechanics", "machine design", "robotics", "manufacturing", "HVAC", "automotive", "turbine", "engine", "kinematics", "dynamics", "material strength", "CAD", "mechanical system"],
+            electrical: ["electrical engineering", "circuit", "power", "electronic", "microcontroller", "transformer", "motor", "generator", "signal processing", "control systems", "semiconductor", "automation", "pcb", "embedded system", "electrical design"]
         };
+
+        // Video history to prevent duplicate API calls
+        const videoHistory = {};
 
         // Initialize event listeners
         function init() {
@@ -270,6 +413,14 @@
             dismissUpgradeBtn.addEventListener('click', function() {
                 upgradeMessage.style.display = 'none';
             });
+
+            // Dismiss warning message
+            dismissWarningBtn.addEventListener('click', function() {
+                warningMessage.style.display = 'none';
+            });
+
+            // Hide video container initially
+            videoContainer.style.display = 'none';
         }
 
         // Handle topic selection
@@ -279,6 +430,7 @@
             if (availableTopics.includes(selectedTopic)) {
                 inputContainer.style.display = 'block';
                 upgradeMessage.style.display = 'none';
+                warningMessage.style.display = 'none';
                 videoContainer.style.display = 'none';
                 showMessage('', 'none');
             } else {
@@ -291,6 +443,14 @@
         function showUpgradeMessage() {
             upgradeMessage.style.display = 'block';
             inputContainer.style.display = 'none';
+            videoContainer.style.display = 'none';
+            warningMessage.style.display = 'none';
+        }
+
+        // Show warning message for mismatched topic
+        function showWarningMessage(topic) {
+            requiredTopic.textContent = capitalizeFirstLetter(topic) + " Engineering";
+            warningMessage.style.display = 'block';
             videoContainer.style.display = 'none';
         }
 
@@ -312,8 +472,11 @@
                 return;
             }
             
-            // For a real application, you would verify the video topic using YouTube API
-            // Here we'll simulate topic verification
+            // Show loader
+            loader.style.display = 'block';
+            showMessage('', 'none');
+            
+            // Verify video topic
             verifyVideoTopic(videoId, selectedTopic);
         }
 
@@ -325,15 +488,150 @@
             return (match && match[2].length === 11) ? match[2] : null;
         }
 
-        // Verify if video matches selected topic (simulated)
+        // Verify if video matches selected topic
         function verifyVideoTopic(videoId, topic) {
-            // In a real application, you would use YouTube API to get video details
-            // and verify that it matches the topic using tags, description, etc.
+            // In a real app, this would use the YouTube API
+            // For this demo, we'll simulate the API call and verification process
             
-            // For demo purposes, we'll just load the video and assume it's appropriate
-            // In a real app, consider using YouTube Data API to check video metadata
+            // Check if we already processed this video
+            if (videoHistory[videoId]) {
+                const videoData = videoHistory[videoId];
+                processVideoData(videoData, topic);
+                return;
+            }
             
-            loadVideo(videoId, topic);
+            // Simulate API call delay
+            setTimeout(() => {
+                // Generate random video data for demonstration
+                const videoData = generateMockVideoData(videoId, topic);
+                
+                // Cache the video data
+                videoHistory[videoId] = videoData;
+                
+                // Process the video data
+                processVideoData(videoData, topic);
+            }, 1500);
+        }
+
+        // Generate mock video data (simulating YouTube API response)
+        function generateMockVideoData(videoId, requestedTopic) {
+            // Determine if we want this to be a matching video or non-matching video
+            // 70% chance of being related to requested topic, 30% chance of being unrelated
+            const isRelated = Math.random() < 0.7;
+            
+            // If not related, pick a random different topic
+            const actualTopic = isRelated ? requestedTopic : 
+                availableTopics.filter(t => t !== requestedTopic)[Math.floor(Math.random() * (availableTopics.length - 1))];
+            
+            // Generate a random title that matches the actual topic
+            const topicTitles = {
+                civil: [
+                    "Advanced Civil Engineering Concepts",
+                    "Building Construction Techniques",
+                    "Structural Analysis and Design",
+                    "Urban Infrastructure Planning",
+                    "Concrete Technology and Applications"
+                ],
+                mechanical: [
+                    "Mechanical Engineering Fundamentals",
+                    "Thermodynamics and Heat Transfer",
+                    "Automotive Engineering Principles",
+                    "Manufacturing Process Optimization",
+                    "Robotics and Automation Systems"
+                ],
+                electrical: [
+                    "Electrical Circuit Analysis",
+                    "Power Systems Engineering",
+                    "Electronic Device Design",
+                    "Control Systems and Automation",
+                    "Digital Signal Processing"
+                ]
+            };
+            
+            // Pick a random title from the actual topic
+            const titleIndex = Math.floor(Math.random() * topicTitles[actualTopic].length);
+            const title = topicTitles[actualTopic][titleIndex];
+            
+            // Generate a description with relevant keywords
+            const keywords = topicKeywords[actualTopic];
+            const shuffledKeywords = [...keywords].sort(() => 0.5 - Math.random());
+            const usedKeywords = shuffledKeywords.slice(0, Math.floor(Math.random() * 5) + 3);
+            
+            const description = `This educational video covers ${usedKeywords.join(', ')} and other important ${actualTopic} engineering concepts. Perfect for engineering students and professionals.`;
+            
+            return {
+                id: videoId,
+                title: title,
+                description: description,
+                topic: actualTopic,
+                keywords: usedKeywords
+            };
+        }
+
+        // Process video data and verify topic match
+        function processVideoData(videoData, requestedTopic) {
+            // Hide loader
+            loader.style.display = 'none';
+            
+            // Update video information
+            videoTitle.textContent = videoData.title;
+            videoDescription.textContent = videoData.description;
+            
+            // Update verification panel
+            selectedTopicDisplay.textContent = capitalizeFirstLetter(requestedTopic) + " Engineering";
+            
+            // Clear previous keywords
+            keywordList.innerHTML = '';
+            
+            // Add keywords
+            videoData.keywords.forEach(keyword => {
+                const keywordTag = document.createElement('span');
+                keywordTag.className = 'keyword-tag';
+                keywordTag.textContent = keyword;
+                keywordList.appendChild(keywordTag);
+            });
+            
+            // Calculate match score
+            const requestedKeywords = topicKeywords[requestedTopic];
+            let matchCount = 0;
+            
+            videoData.keywords.forEach(keyword => {
+                if (requestedKeywords.includes(keyword)) {
+                    matchCount++;
+                }
+            });
+            
+            const matchPercentage = (matchCount / videoData.keywords.length) * 100;
+            
+            // Animate progress bar
+            verificationProgress.style.width = '0%';
+            setTimeout(() => {
+                verificationProgress.style.width = matchPercentage + '%';
+            }, 100);
+            
+            // Update verification result
+            const isMatch = videoData.topic === requestedTopic;
+            
+            if (isMatch) {
+                verificationResult.textContent = '✅ Verification Passed: Video is related to the selected topic';
+                verificationResult.className = 'verification-result verification-passed';
+                
+                // Show video
+                loadVideo(videoData.id, requestedTopic);
+                
+                showMessage(`Successfully loaded ${capitalizeFirstLetter(requestedTopic)} Engineering video!`, 'success');
+            } else {
+                verificationResult.textContent = '❌ Verification Failed: Video is not related to the selected topic';
+                verificationResult.className = 'verification-result verification-failed';
+                
+                // Show warning message
+                showWarningMessage(requestedTopic);
+                
+                // Still load the video but with warning
+                loadVideo(videoData.id, requestedTopic);
+                
+                showMessage(`Warning: This video appears to be about ${capitalizeFirstLetter(videoData.topic)} Engineering, not ${capitalizeFirstLetter(requestedTopic)} Engineering`, 'warning');
+            }
         }
 
         // Load the video into the iframe
@@ -344,16 +642,8 @@
             // Update iframe
             videoFrame.src = embedUrl;
             
-            // Set some mock details
-            videoTitle.textContent = `${capitalizeFirstLetter(topic)} Engineering Video`;
-            videoDescription.textContent = `This is a ${topic} engineering educational video. The content has been verified to match your selected topic.`;
-            
             // Show video container
             videoContainer.style.display = 'block';
-            showMessage(`Successfully loaded ${topic} engineering video!`, 'success');
-            
-            // In a real application, you would fetch the actual video title and description
-            // from the YouTube API
         }
 
         // Show message
