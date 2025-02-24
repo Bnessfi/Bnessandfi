@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering YouTube Video Viewer</title>
+    <title>Law Studies YouTube Video Viewer</title>
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
+            --primary-color: #8e44ad;
+            --secondary-color: #9b59b6;
             --accent-color: #e74c3c;
-            --dark-color: #2c3e50;
-            --light-color: #ecf0f1;
+            --dark-color: #6c3483;
+            --light-color: #f5eef8;
         }
 
         * {
@@ -33,8 +33,8 @@
             text-align: center;
             margin-bottom: 30px;
             padding: 20px;
-            background-color: var(--dark-color);
-            color: var(--light-color);
+            background-color: var(--primary-color);
+            color: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -97,7 +97,7 @@
         }
 
         button:hover {
-            background-color: #2980b9;
+            background-color: var(--dark-color);
         }
 
         #videoContainer {
@@ -173,25 +173,25 @@
 </head>
 <body>
     <header>
-        <h1>Engineering YouTube Viewer</h1>
-        <p>Watch educational engineering videos</p>
+        <h1>Law Studies YouTube Viewer</h1>
+        <p>Watch educational Law Studies videos</p>
     </header>
 
     <div class="container">
         <div class="form-group">
-            <label for="topicSelect">Select Engineering Topic:</label>
+            <label for="topicSelect">Select Law Studies Topic:</label>
             <select id="topicSelect">
                 <option value="" disabled selected>-- Select a topic --</option>
-                <option value="civil" class="option-available">Civil Engineering</option>
-                <option value="mechanical" class="option-available">Mechanical Engineering</option>
-                <option value="electrical" class="option-available">Electrical Engineering</option>
-                <option value="chemical" class="option-unavailable">Chemical Engineering</option>
-                <option value="computer" class="option-unavailable">Computer Engineering</option>
-                <option value="aerospace" class="option-unavailable">Aerospace Engineering</option>
-                <option value="biomedical" class="option-unavailable">Biomedical Engineering</option>
-                <option value="environmental" class="option-unavailable">Environmental Engineering</option>
-                <option value="industrial" class="option-unavailable">Industrial Engineering</option>
-                <option value="materials" class="option-unavailable">Materials Engineering</option>
+                <option value="constitutional" class="option-available">Constitutional Law</option>
+                <option value="criminal" class="option-available">Criminal Law</option>
+                <option value="contract" class="option-available">Contract Law</option>
+                <option value="international" class="option-unavailable">International Law</option>
+                <option value="corporate" class="option-unavailable">Corporate Law</option>
+                <option value="property" class="option-unavailable">Property Law</option>
+                <option value="family" class="option-unavailable">Family Law</option>
+                <option value="immigration" class="option-unavailable">Immigration Law</option>
+                <option value="tax" class="option-unavailable">Tax Law</option>
+                <option value="intellectual" class="option-unavailable">Intellectual Property Law</option>
             </select>
         </div>
 
@@ -222,7 +222,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Engineering YouTube Viewer | Educational Purposes Only</p>
+        <p>&copy; 2025 Law Studies YouTube Viewer | Educational Purposes Only</p>
     </footer>
 
     <script>
@@ -240,13 +240,13 @@
         const messageContainer = document.getElementById('messageContainer');
 
         // List of available topics
-        const availableTopics = ['civil', 'mechanical', 'electrical'];
+        const availableTopics = ['constitutional', 'criminal', 'contract'];
         
         // Topic-specific keywords to validate video content
         const topicKeywords = {
-            civil: ["civil engineering", "construction", "structural", "bridge", "building", "concrete", "infrastructure", "foundation", "architecture", "surveying"],
-            mechanical: ["mechanical engineering", "thermodynamics", "fluid mechanics", "machine design", "robotics", "manufacturing", "HVAC", "automotive", "turbine", "engine"],
-            electrical: ["electrical engineering", "circuit", "power", "electronic", "microcontroller", "transformer", "motor", "generator", "signal processing", "control systems"]
+            constitutional: ["constitutional law", "constitution", "supreme court", "bill of rights", "judicial review", "separation of powers", "federalism", "civil liberties", "civil rights", "amendments"],
+            criminal: ["criminal law", "crimes", "criminal procedure", "criminal justice", "felony", "misdemeanor", "mens rea", "actus reus", "sentencing", "prosecution", "defense"],
+            contract: ["contract law", "contracts", "offer", "acceptance", "consideration", "breach of contract", "remedies", "damages", "specific performance", "performance", "discharge"]
         };
 
         // Initialize event listeners
@@ -331,8 +331,6 @@
             // and verify that it matches the topic using tags, description, etc.
             
             // For demo purposes, we'll just load the video and assume it's appropriate
-            // In a real app, consider using YouTube Data API to check video metadata
-            
             loadVideo(videoId, topic);
         }
 
@@ -344,16 +342,44 @@
             // Update iframe
             videoFrame.src = embedUrl;
             
-            // Set some mock details
-            videoTitle.textContent = `${capitalizeFirstLetter(topic)} Engineering Video`;
-            videoDescription.textContent = `This is a ${topic} engineering educational video. The content has been verified to match your selected topic.`;
+            // Set some topic-specific details
+            let title, description;
+            
+            switch(topic) {
+                case 'constitutional':
+                    title = "Constitutional Law Tutorial";
+                    description = "Learn about constitutional principles, rights, and governmental powers in this educational video on constitutional law.";
+                    break;
+                case 'criminal':
+                    title = "Criminal Law Explained";
+                    description = "Understand the fundamentals of criminal law, including offenses, defenses, and procedures in the justice system.";
+                    break;
+                case 'contract':
+                    title = "Contract Law Principles";
+                    description = "Explore contract formation, enforcement, interpretation, and remedies for breach in this contract law educational content.";
+                    break;
+                default:
+                    title = "Law Studies Tutorial";
+                    description = "Educational content for law students and legal professionals.";
+            }
+            
+            videoTitle.textContent = title;
+            videoDescription.textContent = description;
             
             // Show video container
             videoContainer.style.display = 'block';
-            showMessage(`Successfully loaded ${topic} engineering video!`, 'success');
+            showMessage(`Successfully loaded ${getTopicName(topic)} video!`, 'success');
+        }
+
+        // Helper function to get full topic name
+        function getTopicName(topicCode) {
+            const topicNames = {
+                'constitutional': 'Constitutional Law',
+                'criminal': 'Criminal Law',
+                'contract': 'Contract Law'
+            };
             
-            // In a real application, you would fetch the actual video title and description
-            // from the YouTube API
+            return topicNames[topicCode] || topicCode;
         }
 
         // Show message
@@ -371,11 +397,6 @@
             }
             
             messageContainer.style.display = 'block';
-        }
-
-        // Helper function to capitalize first letter
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
         // Initialize the application
