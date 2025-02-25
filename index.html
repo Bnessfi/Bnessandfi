@@ -3,808 +3,971 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering Quiz</title>
+    <title>Accountancy Quiz Speed Test</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --gray-light: #f3f4f6;
-            --gray: #9ca3af;
-            --gray-dark: #4b5563;
-            --text: #1f2937;
-            --text-light: #6b7280;
-            --white: #ffffff;
-            --red: #ef4444;
-            --green: #10b981;
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background-color: var(--gray-light);
-            color: var(--text);
+            font-family: var(--font-main);
+            background-color: #f5f7fa;
+            color: var(--dark-color);
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            padding: 20px;
         }
-        
+
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
         }
-        
+
         h1 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
-        
-        .description {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
+
+        .quiz-intro {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
-        
+
+        .topic-selection {
+            margin: 20px 0;
+        }
+
         .topic-selector {
-            margin-bottom: 2rem;
-        }
-        
-        .select-wrapper {
-            position: relative;
             width: 100%;
-        }
-        
-        select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--gray);
-            border-radius: 6px;
-            background-color: var(--white);
-            color: var(--text);
-            font-size: 1rem;
+            padding: 12px;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            font-size: 16px;
+            color: var(--dark-color);
+            background-color: white;
             cursor: pointer;
-            appearance: none;
         }
-        
-        .select-wrapper::after {
-            content: "▼";
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray-dark);
-            pointer-events: none;
-        }
-        
-        select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-        }
-        
-        button {
-            background-color: var(--primary);
-            color: var(--white);
+
+        .start-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.3s;
         }
-        
-        button:hover {
-            background-color: var(--primary-dark);
+
+        .start-btn:hover {
+            background-color: #34495e;
         }
-        
-        button:disabled {
-            background-color: var(--gray);
+
+        .start-btn:disabled {
+            background-color: #bdc3c7;
             cursor: not-allowed;
         }
-        
-        .pro-badge {
-            background-color: var(--red);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        
+
         .quiz-container {
             display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .quiz-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
         }
-        
-        .quiz-title {
-            font-size: 1.5rem;
-            font-weight: 600;
+
+        .question-count, .score {
+            font-size: 18px;
+            font-weight: bold;
         }
-        
-        .quiz-progress {
-            font-size: 1rem;
-            color: var(--text-light);
+
+        .timer-container {
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
         }
-        
-        .question-container {
-            margin-bottom: 2rem;
+
+        .timer-bar {
+            height: 100%;
+            width: 100%;
+            background-color: var(--accent-color);
+            transition: width 0.1s linear;
         }
-        
+
         .question {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: 20px;
+            margin-bottom: 20px;
         }
-        
+
         .options {
             display: grid;
-            gap: 0.75rem;
+            grid-template-columns: 1fr;
+            gap: 10px;
         }
-        
+
         .option {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            border: 1px solid var(--gray);
-            border-radius: 6px;
+            padding: 15px;
+            background-color: var(--light-color);
+            border: 2px solid #ddd;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.2s;
         }
-        
+
         .option:hover {
-            background-color: var(--gray-light);
+            background-color: #e3e8ec;
+            border-color: var(--primary-color);
         }
-        
-        .option.selected {
-            border-color: var(--primary);
-            background-color: rgba(37, 99, 235, 0.1);
+
+        .option.correct {
+            background-color: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
         }
-        
-        .option-prefix {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--gray-light);
-            border-radius: 50%;
-            margin-right: 1rem;
-            font-weight: 600;
+
+        .option.incorrect {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
         }
-        
-        .selected .option-prefix {
-            background-color: var(--primary);
-            color: var(--white);
+
+        .option.disabled {
+            pointer-events: none;
         }
-        
-        .option-text {
-            flex: 1;
-        }
-        
-        .quiz-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-        }
-        
-        .back-btn {
-            background-color: var(--gray-light);
-            color: var(--text);
-        }
-        
-        .back-btn:hover {
-            background-color: var(--gray);
-        }
-        
-        .results-container {
+
+        .results {
             display: none;
             text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
-        .results-header {
-            margin-bottom: 2rem;
+
+        .results h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
         }
-        
-        .results-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+
+        .score-display {
+            font-size: 24px;
+            margin-bottom: 20px;
         }
-        
-        .results-subtitle {
-            color: var(--text-light);
-        }
-        
-        .score {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin: 1.5rem 0;
-        }
-        
-        .score-text {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .actions {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-        
+
         .restart-btn {
-            background-color: var(--gray-light);
-            color: var(--text);
-        }
-        
-        .pro-tooltip {
-            position: fixed;
-            background-color: rgba(0, 0, 0, 0.9);
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
             color: white;
-            padding: 10px 15px;
+            border: none;
             border-radius: 5px;
-            font-size: 0.9rem;
-            z-index: 1000;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        
-        /* Blurred pro options */
-        .pro-option {
-            filter: blur(1px);
-            opacity: 0.7;
-            position: relative;
-            cursor: not-allowed;
+
+        .restart-btn:hover {
+            background-color: #34495e;
+        }
+
+        .upgrade-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upgrade-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .upgrade-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .close-upgrade {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Styling for disabled topics */
+        option.disabled {
+            color: #bdc3c7;
+            font-style: italic;
+        }
+
+        @media (min-width: 768px) {
+            .options {
+                grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Engineering Quiz Challenge</h1>
-            <p class="description">Test your knowledge with our practice questions</p>
+            <h1>Accountancy Quiz Speed Test</h1>
+            <p>Test your knowledge with quick-fire accounting questions!</p>
         </header>
-        
-        <div id="topic-selector" class="topic-selector">
-            <h2>Select an Engineering Topic</h2>
-            <p class="description">Choose a topic to start your 10-question quiz session</p>
+
+        <div class="quiz-intro">
+            <h2>Ready to test your accounting knowledge?</h2>
+            <p>Select a topic and answer 10 random questions. You have 20 seconds for each question!</p>
             
-            <div class="select-wrapper">
-                <select id="topic-dropdown">
-                    <option value="" disabled selected>Select a topic...</option>
-                    <option value="civil">Civil Engineering</option>
-                    <option value="mechanical">Mechanical Engineering</option>
-                    <option value="electrical">Electrical Engineering</option>
-                    <option value="chemical" class="pro-option">Chemical Engineering</option>
-                    <option value="software" class="pro-option">Software Engineering</option>
-                    <option value="biomedical" class="pro-option">Biomedical Engineering</option>
-                    <option value="aerospace" class="pro-option">Aerospace Engineering</option>
-                    <option value="environmental" class="pro-option">Environmental Engineering</option>
+            <div class="topic-selection">
+                <label for="topic">Select Topic:</label>
+                <select id="topic" class="topic-selector">
+                    <option value="" disabled selected>Choose a topic...</option>
+                    <option value="financial">Financial Accounting</option>
+                    <option value="management">Management Accounting</option>
+                    <option value="auditing">Auditing</option>
                 </select>
             </div>
             
-            <button id="start-quiz" disabled>Start Quiz</button>
+            <button id="start-btn" class="start-btn" disabled>Start Quiz</button>
         </div>
-        
+
         <div id="quiz-container" class="quiz-container">
             <div class="quiz-header">
-                <div class="quiz-title" id="quiz-title">Civil Engineering Quiz</div>
-                <div class="quiz-progress">Question <span id="current-question">1</span> of <span id="total-questions">10</span></div>
+                <div class="question-count">Question <span id="current">1</span>/<span id="total">10</span></div>
+                <div class="score">Score: <span id="score">0</span></div>
             </div>
             
-            <div class="question-container">
-                <div id="question" class="question">Loading question...</div>
-                <div id="options" class="options">
-                    <!-- Options will be inserted here by JavaScript -->
-                </div>
+            <div class="timer-container">
+                <div id="timer-bar" class="timer-bar"></div>
             </div>
             
-            <div class="quiz-navigation">
-                <button id="back-btn" class="back-btn">Back to Topics</button>
-                <button id="next-btn">Next Question</button>
-            </div>
+            <div id="question" class="question"></div>
+            
+            <div id="options" class="options"></div>
         </div>
-        
-        <div id="results-container" class="results-container">
-            <div class="results-header">
-                <div class="results-title">Quiz Complete!</div>
-                <div class="results-subtitle" id="results-topic">Civil Engineering Quiz</div>
-            </div>
-            
-            <div class="score" id="score">7/10</div>
-            <div class="score-text" id="score-text">Great job! You scored 70%</div>
-            
-            <div class="actions">
-                <button id="restart-btn" class="restart-btn">Try Another Topic</button>
-                <button id="retry-btn">Retry This Topic</button>
-            </div>
+
+        <div id="results" class="results">
+            <h2>Quiz Complete!</h2>
+            <div class="score-display">Your score: <span id="final-score">0</span> out of 10</div>
+            <button id="restart-btn" class="restart-btn">Take Another Quiz</button>
         </div>
     </div>
-    
-    <div id="pro-tooltip" class="pro-tooltip">UPGRADE TO PRO</div>
-    
+
+    <div id="upgrade-modal" class="upgrade-modal">
+        <div class="upgrade-content">
+            <h2>UPGRADE TO PRO</h2>
+            <p>This topic is only available in the PRO version.</p>
+            <button id="close-upgrade" class="close-upgrade">Close</button>
+        </div>
+    </div>
+
     <script>
         // DOM Elements
-        const topicSelector = document.getElementById('topic-selector');
+        const topicSelector = document.getElementById('topic');
+        const startButton = document.getElementById('start-btn');
         const quizContainer = document.getElementById('quiz-container');
-        const resultsContainer = document.getElementById('results-container');
-        const topicDropdown = document.getElementById('topic-dropdown');
-        const startQuizBtn = document.getElementById('start-quiz');
-        const backBtn = document.getElementById('back-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const restartBtn = document.getElementById('restart-btn');
-        const retryBtn = document.getElementById('retry-btn');
-        const quizTitle = document.getElementById('quiz-title');
-        const currentQuestionSpan = document.getElementById('current-question');
-        const totalQuestionsSpan = document.getElementById('total-questions');
+        const quizIntro = document.querySelector('.quiz-intro');
         const questionElement = document.getElementById('question');
-        const optionsElement = document.getElementById('options');
-        const resultsTopic = document.getElementById('results-topic');
+        const optionsContainer = document.getElementById('options');
+        const currentQuestionElement = document.getElementById('current');
+        const totalQuestionsElement = document.getElementById('total');
         const scoreElement = document.getElementById('score');
-        const scoreTextElement = document.getElementById('score-text');
-        const proTooltip = document.getElementById('pro-tooltip');
-        
+        const timerBar = document.getElementById('timer-bar');
+        const resultsContainer = document.getElementById('results');
+        const finalScoreElement = document.getElementById('final-score');
+        const restartButton = document.getElementById('restart-btn');
+        const upgradeModal = document.getElementById('upgrade-modal');
+        const closeUpgradeButton = document.getElementById('close-upgrade');
+
         // Quiz state
-        let currentTopic = '';
-        let questions = [];
-        let currentQuestionIndex = 0;
+        let currentQuestion = 0;
         let score = 0;
-        let selectedAnswers = [];
-        
-        // Question banks for each topic
+        let timer;
+        let timeLeft;
+        let questions = [];
+        let answered = false;
+
+        // Question Banks
         const questionBanks = {
-            civil: [
+            financial: [
                 {
-                    question: "What is the primary component of concrete?",
-                    options: ["Cement", "Sand", "Gravel", "Water"],
+                    question: "Which financial statement shows a company's financial position at a specific point in time?",
+                    options: [
+                        "Income Statement",
+                        "Balance Sheet",
+                        "Cash Flow Statement",
+                        "Statement of Changes in Equity"
+                    ],
+                    answer: 1
+                },
+                {
+                    question: "Under which accounting principle should revenue be recognized?",
+                    options: [
+                        "When cash is received",
+                        "When service is rendered or goods are delivered",
+                        "At the end of the accounting period",
+                        "When invoices are issued"
+                    ],
+                    answer: 1
+                },
+                {
+                    question: "Which of the following is NOT a current asset?",
+                    options: [
+                        "Cash",
+                        "Accounts Receivable",
+                        "Equipment",
+                        "Inventory"
+                    ],
+                    answer: 2
+                },
+                {
+                    question: "What is the accounting equation?",
+                    options: [
+                        "Assets = Liabilities + Owner's Equity",
+                        "Assets = Liabilities - Owner's Equity",
+                        "Assets + Liabilities = Owner's Equity",
+                        "Assets - Owner's Equity = Liabilities"
+                    ],
                     answer: 0
                 },
                 {
-                    question: "Which type of foundation is most suitable for clay soil?",
-                    options: ["Raft foundation", "Pile foundation", "Strip foundation", "Pad foundation"],
+                    question: "Which depreciation method allocates an equal amount of depreciation expense to each period?",
+                    options: [
+                        "Declining Balance",
+                        "Sum-of-the-Years'-Digits",
+                        "Straight Line",
+                        "Units of Production"
+                    ],
+                    answer: 2
+                },
+                {
+                    question: "What is the primary purpose of the statement of cash flows?",
+                    options: [
+                        "To show profit or loss",
+                        "To show changes in assets and liabilities",
+                        "To show inflows and outflows of cash",
+                        "To show changes in owner's equity"
+                    ],
+                    answer: 2
+                },
+                {
+                    question: "Which of the following is a contra-asset account?",
+                    options: [
+                        "Accounts Payable",
+                        "Accumulated Depreciation",
+                        "Retained Earnings",
+                        "Unearned Revenue"
+                    ],
                     answer: 1
                 },
                 {
-                    question: "What is the purpose of a retaining wall?",
-                    options: ["To provide shade", "To hold back soil", "To support a roof", "To divide properties"],
+                    question: "What accounting principle states that a company should use the same accounting methods from period to period?",
+                    options: [
+                        "Materiality Principle",
+                        "Consistency Principle",
+                        "Conservatism Principle",
+                        "Going Concern Principle"
+                    ],
                     answer: 1
                 },
                 {
-                    question: "What is the main cause of reinforcement corrosion in concrete structures?",
-                    options: ["Carbonation", "Chloride attack", "Sulfate attack", "Freeze-thaw cycles"],
+                    question: "Which inventory valuation method assumes the latest items purchased are the first ones sold?",
+                    options: [
+                        "FIFO (First-In, First-Out)",
+                        "LIFO (Last-In, First-Out)",
+                        "Weighted Average",
+                        "Specific Identification"
+                    ],
                     answer: 1
                 },
                 {
-                    question: "Which of these is NOT a type of beam?",
-                    options: ["Simply supported beam", "Cantilever beam", "Continuous beam", "Columnar beam"],
-                    answer: 3
+                    question: "What is goodwill in accounting terms?",
+                    options: [
+                        "The reputation of a company",
+                        "The excess of purchase price over the fair value of net assets acquired",
+                        "The value of customer relationships",
+                        "The company's brand recognition"
+                    ],
+                    answer: 1
                 },
                 {
-                    question: "What does AASHTO stand for in civil engineering?",
-                    options: ["American Association of State Highway and Transportation Officials", "American Association of Structural and Highway Testing Organizations", "Association of American State Highway Technical Officers", "Association of Architectural and Structural Highway Testing Organizations"],
+                    question: "What does the term 'accrual' refer to in accounting?",
+                    options: [
+                        "Recording revenues when earned and expenses when incurred",
+                        "Recording transactions only when cash changes hands",
+                        "Adjusting entries at the end of an accounting period",
+                        "Recording prepaid expenses"
+                    ],
                     answer: 0
                 },
                 {
-                    question: "What is the slump test used to measure?",
-                    options: ["Soil density", "Concrete workability", "Steel tensile strength", "Asphalt durability"],
-                    answer: 1
-                },
-                {
-                    question: "Which of these is NOT a common type of bridge?",
-                    options: ["Arch bridge", "Suspension bridge", "Cantilever bridge", "Columnar bridge"],
-                    answer: 3
-                },
-                {
-                    question: "What is the purpose of expansion joints in concrete structures?",
-                    options: ["To improve aesthetics", "To allow for thermal expansion and contraction", "To increase structural strength", "To reduce construction costs"],
-                    answer: 1
-                },
-                {
-                    question: "What material is primarily used for reinforcement in concrete?",
-                    options: ["Copper", "Aluminum", "Steel", "Titanium"],
+                    question: "Which financial ratio measures a company's ability to pay short-term obligations?",
+                    options: [
+                        "Debt-to-Equity Ratio",
+                        "Return on Assets",
+                        "Current Ratio",
+                        "Gross Profit Margin"
+                    ],
                     answer: 2
                 },
                 {
-                    question: "Which test is used to determine the compressive strength of concrete?",
-                    options: ["Slump test", "Cube test", "Tension test", "Vebe test"],
+                    question: "What is the purpose of a trial balance in accounting?",
+                    options: [
+                        "To ensure that total debits equal total credits",
+                        "To calculate net income",
+                        "To prepare the balance sheet",
+                        "To determine cash flow"
+                    ],
+                    answer: 0
+                },
+                {
+                    question: "Under GAAP, how should long-term investments in equity securities be reported?",
+                    options: [
+                        "At historical cost",
+                        "At fair market value",
+                        "At the lower of cost or market",
+                        "At replacement cost"
+                    ],
                     answer: 1
                 },
                 {
-                    question: "What is the primary function of a dam?",
-                    options: ["To generate electricity", "To provide drinking water", "To control water flow", "To prevent flooding"],
-                    answer: 2
-                },
-                {
-                    question: "What type of soil is most susceptible to liquefaction during earthquakes?",
-                    options: ["Clay", "Silt", "Sand", "Gravel"],
-                    answer: 2
-                },
-                {
-                    question: "What is the purpose of a culvert in highway design?",
-                    options: ["To reduce speed", "To allow water to pass under the roadway", "To provide a rest area", "To support bridges"],
-                    answer: 1
-                },
-                {
-                    question: "What does BOQ stand for in construction?",
-                    options: ["Bill of Quantities", "Building Operations Quality", "Base of Quality", "Budget Overrun Quota"],
+                    question: "What does IFRS stand for?",
+                    options: [
+                        "International Financial Reporting Standards",
+                        "Internal Financial Reporting System",
+                        "Integrated Financial Reporting Structure",
+                        "International Framework for Reporting Standards"
+                    ],
                     answer: 0
                 }
             ],
-            mechanical: [
+            management: [
                 {
-                    question: "What is the First Law of Thermodynamics?",
-                    options: ["Energy can be created but not destroyed", "Energy cannot be created or destroyed", "Energy can be destroyed but not created", "Energy can be both created and destroyed"],
-                    answer: 1
-                },
-                {
-                    question: "Which material has the highest thermal conductivity?",
-                    options: ["Wood", "Plastic", "Copper", "Concrete"],
+                    question: "Which costing method assigns manufacturing overhead costs to products based on activities that drive costs?",
+                    options: [
+                        "Job Order Costing",
+                        "Process Costing",
+                        "Activity-Based Costing",
+                        "Variable Costing"
+                    ],
                     answer: 2
                 },
                 {
-                    question: "What type of engine operates on the Otto cycle?",
-                    options: ["Diesel engine", "Gas turbine", "Steam engine", "Gasoline engine"],
+                    question: "What is the term for costs that change in proportion to the level of business activity?",
+                    options: [
+                        "Fixed costs",
+                        "Variable costs",
+                        "Period costs",
+                        "Sunk costs"
+                    ],
+                    answer: 1
+                },
+                {
+                    question: "Which budgeting approach starts from zero and requires justification for all expenditures?",
+                    options: [
+                        "Incremental budgeting",
+                        "Flexible budgeting",
+                        "Zero-based budgeting",
+                        "Master budgeting"
+                    ],
+                    answer: 2
+                },
+                {
+                    question: "What is the breakeven point?",
+                    options: [
+                        "Where total revenue equals total cost",
+                        "Where marginal revenue equals marginal cost",
+                        "Where fixed costs are fully recovered",
+                        "Where variable costs are zero"
+                    ],
+                    answer: 0
+                },
+                {
+                    question: "Which of the following is NOT typically included in a master budget?",
+                    options: [
+                        "Sales budget",
+                        "Production budget",
+                        "Cash budget",
+                        "SWOT analysis"
+                    ],
                     answer: 3
                 },
                 {
-                    question: "What is the purpose of a flywheel in a machine?",
-                    options: ["To increase speed", "To store energy", "To reduce friction", "To change direction"],
+                    question: "What is the primary purpose of variance analysis?",
+                    options: [
+                        "To set standards for future performance",
+                        "To identify differences between actual and standard/budgeted performance",
+                        "To evaluate employee performance",
+                        "To determine product pricing"
+                    ],
                     answer: 1
                 },
                 {
-                    question: "Which of these is NOT a type of gear?",
-                    options: ["Spur gear", "Helical gear", "Worm gear", "Linear gear"],
-                    answer: 3
-                },
-                {
-                    question: "What does FEA stand for in mechanical engineering?",
-                    options: ["Finite Element Analysis", "Fluid Energy Analysis", "Force and Energy Application", "Functional Equipment Assessment"],
-                    answer: 0
-                },
-                {
-                    question: "Which principle explains why airplanes can fly?",
-                    options: ["Newton's Third Law", "Bernoulli's Principle", "Pascal's Law", "Archimedes' Principle"],
-                    answer: 1
-                },
-                {
-                    question: "What type of stress tries to pull material apart?",
-                    options: ["Compressive stress", "Shear stress", "Tensile stress", "Torsional stress"],
+                    question: "Which of the following is an example of a cost driver?",
+                    options: [
+                        "Net income",
+                        "Contribution margin",
+                        "Number of machine hours",
+                        "Gross profit"
+                    ],
                     answer: 2
                 },
                 {
-                    question: "What is the main component of a hydraulic system?",
-                    options: ["Air compressor", "Pump", "Electric motor", "Gear box"],
-                    answer: 1
-                },
-                {
-                    question: "Which type of bearing allows for rotation with minimal friction?",
-                    options: ["Ball bearing", "Sleeve bearing", "Thrust bearing", "Journal bearing"],
-                    answer: 0
-                },
-                {
-                    question: "What is the function of a heat exchanger?",
-                    options: ["To generate heat", "To convert heat to electricity", "To transfer heat between fluids", "To measure heat capacity"],
+                    question: "What is the term for costs that have already been incurred and cannot be changed by future decisions?",
+                    options: [
+                        "Opportunity costs",
+                        "Differential costs",
+                        "Sunk costs",
+                        "Relevant costs"
+                    ],
                     answer: 2
                 },
                 {
-                    question: "What is the primary purpose of lubrication in mechanical systems?",
-                    options: ["To reduce noise", "To reduce friction", "To increase power", "To prevent corrosion"],
-                    answer: 1
-                },
-                {
-                    question: "Which material property represents the ability to return to its original shape after deformation?",
-                    options: ["Elasticity", "Plasticity", "Ductility", "Malleability"],
-                    answer: 0
-                },
-                {
-                    question: "What does CNC stand for in manufacturing?",
-                    options: ["Computer Numerical Control", "Computerized Network Control", "Continuous Numerical Calculation", "Central Network Computing"],
-                    answer: 0
-                },
-                {
-                    question: "Which law states that the pressure in a fluid at rest is the same in all directions?",
-                    options: ["Newton's Law", "Bernoulli's Law", "Pascal's Law", "Boyle's Law"],
+                    question: "Which performance measurement focuses on both financial and non-financial metrics?",
+                    options: [
+                        "Return on Investment",
+                        "Residual Income",
+                        "Balanced Scorecard",
+                        "Economic Value Added"
+                    ],
                     answer: 2
+                },
+                {
+                    question: "What formula is used to calculate contribution margin?",
+                    options: [
+                        "Sales - Variable Costs",
+                        "Sales - Fixed Costs",
+                        "Sales - Total Costs",
+                        "Sales - Operating Expenses"
+                    ],
+                    answer: 0
+                },
+                {
+                    question: "Which of the following is a limitation of standard costing?",
+                    options: [
+                        "It provides a basis for performance evaluation",
+                        "It simplifies costing procedures",
+                        "It can demotivate employees if standards are too tight",
+                        "It helps with cost control"
+                    ],
+                    answer: 2
+                },
+                {
+                    question: "What is the concept of responsibility accounting based on?",
+                    options: [
+                        "Holding managers accountable only for costs they can control",
+                        "Attributing all costs to top management",
+                        "Focusing exclusively on fixed costs",
+                        "Eliminating cost variances"
+                    ],
+                    answer: 0
+                },
+                {
+                    question: "What is the purpose of a flexible budget?",
+                    options: [
+                        "To adjust the budget for different levels of activity",
+                        "To eliminate the need for variance analysis",
+                        "To focus only on controllable costs",
+                        "To replace the master budget"
+                    ],
+                    answer: 0
+                },
+                {
+                    question: "Which capital budgeting technique considers the time value of money?",
+                    options: [
+                        "Payback Period",
+                        "Accounting Rate of Return",
+                        "Net Present Value",
+                        "Simple Rate of Return"
+                    ],
+                    answer: 2
+                },
+                {
+                    question: "What is the main purpose of transfer pricing?",
+                    options: [
+                        "To minimize corporate taxes",
+                        "To fairly allocate revenues between divisions of a company",
+                        "To maximize overall corporate profits",
+                        "To set prices for external customers"
+                    ],
+                    answer: 1
                 }
             ],
-            electrical: [
+            auditing: [
                 {
-                    question: "What is Ohm's Law?",
-                    options: ["V = IR", "P = VI", "V = P/I", "I = P/V"],
+                    question: "What is the primary objective of an external audit?",
+                    options: [
+                        "To detect all instances of fraud",
+                        "To express an opinion on the financial statements",
+                        "To assess management performance",
+                        "To ensure compliance with tax laws"
+                    ],
+                    answer: 1
+                },
+                {
+                    question: "Which of the following is NOT one of the fundamental principles in the IESBA Code of Ethics?",
+                    options: [
+                        "Integrity",
+                        "Objectivity",
+                        "Confidentiality",
+                        "Specialization"
+                    ],
+                    answer: 3
+                },
+                {
+                    question: "What is audit risk?",
+                    options: [
+                        "The risk that the auditor expresses an inappropriate opinion on financial statements",
+                        "The risk that the client will sue the auditor",
+                        "The risk that fraud will be detected",
+                        "The risk that an audit will take longer than planned"
+                    ],
                     answer: 0
                 },
                 {
-                    question: "Which component stores electrical energy in an electric field?",
-                    options: ["Resistor", "Inductor", "Capacitor", "Transistor"],
+                    question: "Which of the following is an example of a substantive audit procedure?",
+                    options: [
+                        "Reviewing the client's accounting system",
+                        "Testing internal controls over cash receipts",
+                        "Confirming accounts receivable balances with customers",
+                        "Assessing the risk of material misstatement"
+                    ],
                     answer: 2
                 },
                 {
-                    question: "What is the unit of electrical resistance?",
-                    options: ["Volt", "Ampere", "Ohm", "Watt"],
+                    question: "What is the purpose of an engagement letter in auditing?",
+                    options: [
+                        "To provide the audit opinion",
+                        "To outline the terms and conditions of the audit engagement",
+                        "To report internal control weaknesses",
+                        "To document audit procedures performed"
+                    ],
+                    answer: 1
+                },
+                {
+                    question: "Which of the following best describes the concept of materiality in auditing?",
+                    options: [
+                        "The threshold above which missing information would influence the decisions of users",
+                        "The likelihood that an auditor will be sued",
+                        "The minimum sample size required for testing",
+                        "The maximum allowable error in the financial statements"
+                    ],
+                    answer: 0
+                },
+                {
+                    question: "What is the purpose of obtaining an understanding of internal control during an audit?",
+                    options: [
+                        "To make recommendations for improving the client's business",
+                        "To identify risks of material misstatement and design audit procedures",
+                        "To determine management's compensation",
+                        "To ensure compliance with all laws and regulations"
+                    ],
+                    answer: 1
+                },
+                {
+                    question: "Which of the following is NOT a type of audit opinion?",
+                    options: [
+                        "Unqualified opinion",
+                        "Qualified opinion",
+                        "Adverse opinion",
+                        "Investigative opinion"
+                    ],
+                    answer: 3
+                },
+                {
+                    question: "What does the term 'reasonable assurance' mean in the context of an audit?",
+                    options: [
+                        "A high, but not absolute, level of assurance",
+                        "A low level of assurance",
+                        "A guarantee that the financial statements are completely accurate",
+                        "Assurance that all instances of fraud have been detected"
+                    ],
+                    answer: 0
+                },
+                {
+                    question: "What is audit sampling?",
+                    options: [
+                        "Testing 100% of the transactions in an account",
+                        "Testing only high-value transactions",
+                        "Applying audit procedures to less than 100% of items in an account",
+                        "Reviewing the client's sampling procedures"
+                    ],
                     answer: 2
                 },
                 {
-                    question: "Which semiconductor device is used as a voltage regulator?",
-                    options: ["Diode", "Transistor", "Zener diode", "MOSFET"],
+                    question: "What is the purpose of audit documentation?",
+                    options: [
+                        "To provide evidence of the audit procedures performed",
+                        "To explain accounting principles to the client",
+                        "To advertise the auditor's services",
+                        "To calculate the audit fee"
+                    ],
+                    answer: 0
+                },
+                {
+                    question: "Which of the following is an example of a test of control?",
+                    options: [
+                        "Confirming bank balances",
+                        "Observing inventory count procedures",
+                        "Examining invoices for proper approval",
+                        "Performing analytical procedures on revenue"
+                    ],
                     answer: 2
                 },
                 {
-                    question: "What does AC stand for in electrical engineering?",
-                    options: ["Active Current", "Alternating Current", "Ampere Conductor", "Average Conduction"],
+                    question: "What is the purpose of an analytical procedure in an audit?",
+                    options: [
+                        "To increase sample size",
+                        "To evaluate financial information through analysis of relationships",
+                        "To confirm all account balances",
+                        "To determine audit fees"
+                    ],
                     answer: 1
                 },
                 {
-                    question: "Which law states that the voltage around a closed loop is equal to the sum of the voltage drops in the loop?",
-                    options: ["Ohm's Law", "Faraday's Law", "Kirchhoff's Voltage Law", "Lenz's Law"],
-                    answer: 2
-                },
-                {
-                    question: "What is the function of a transformer?",
-                    options: ["To convert AC to DC", "To change voltage levels", "To store electrical energy", "To regulate current flow"],
+                    question: "Who has primary responsibility for the prevention and detection of fraud?",
+                    options: [
+                        "The external auditor",
+                        "Management and those charged with governance",
+                        "The internal audit department",
+                        "Regulatory authorities"
+                    ],
                     answer: 1
                 },
                 {
-                    question: "Which component opposes changes in current?",
-                    options: ["Resistor", "Capacitor", "Inductor", "Diode"],
-                    answer: 2
-                },
-                {
-                    question: "What is the standard frequency of AC power in the United States?",
-                    options: ["50 Hz", "60 Hz", "120 Hz", "220 Hz"],
+                    question: "What is meant by auditor independence?",
+                    options: [
+                        "The auditor should not be an employee of the client",
+                        "The auditor should have no financial or other interest that compromises objectivity",
+                        "The auditor should not provide non-audit services",
+                        "The auditor should change clients regularly"
+                    ],
                     answer: 1
-                },
-                {
-                    question: "Which logic gate outputs TRUE only when all inputs are TRUE?",
-                    options: ["OR gate", "AND gate", "NOT gate", "XOR gate"],
-                    answer: 1
-                },
-                {
-                    question: "What does PWM stand for in electrical engineering?",
-                    options: ["Power Width Management", "Pulse Width Modulation", "Phase Waveform Measurement", "Potential Wattage Maximizer"],
-                    answer: 1
-                },
-                {
-                    question: "Which device converts mechanical energy into electrical energy?",
-                    options: ["Motor", "Generator", "Transformer", "Capacitor"],
-                    answer: 1
-                },
-                {
-                    question: "What is the purpose of a fuse in an electrical circuit?",
-                    options: ["To increase voltage", "To protect against overcurrent", "To store energy", "To amplify signals"],
-                    answer: 1
-                },
-                {
-                    question: "Which material is the best electrical conductor under normal conditions?",
-                    options: ["Gold", "Silver", "Copper", "Aluminum"],
-                    answer: 1
-                },
-                {
-                    question: "What does EMF stand for in electrical engineering?",
-                    options: ["Electro-Mechanical Force", "Electro-Magnetic Field", "Electro-Motive Force", "Electronic Magnetic Flux"],
-                    answer: 2
                 }
             ]
         };
-        
-        // Initialize the quiz
-        function init() {
-            // Enable/disable start button based on topic selection
-            topicDropdown.addEventListener('change', function() {
-                const selectedOption = this.options[this.selectedIndex];
-                currentTopic = this.value;
-                
-                if (currentTopic && !selectedOption.classList.contains('pro-option')) {
-                    startQuizBtn.disabled = false;
-                } else {
-                    startQuizBtn.disabled = true;
-                }
-            });
-            
-            // Handle PRO option selection
-            topicDropdown.addEventListener('mousedown', function(event) {
-                const select = this;
-                setTimeout(function() {
-                    const selectedOption = select.options[select.selectedIndex];
-                    if (selectedOption && selectedOption.classList.contains('pro-option')) {
-                        showProTooltip(event);
-                        // Reset selection to previous or empty
-                        select.value = currentTopic || "";
-                    }
-                }, 100);
-            });
-            
-            // Start quiz button click handler
-            startQuizBtn.addEventListener('click', startQuiz);
-            
-            // Back button click handler
-            backBtn.addEventListener('click', function() {
-                showTopicSelector();
-            });
-            
-            // Next button click handler
-            nextBtn.addEventListener('click', goToNextQuestion);
-            
-            // Restart button click handler
-            restartBtn.addEventListener('click', function() {
-                showTopicSelector();
-            });
-            
-            // Retry button click handler
-            retryBtn.addEventListener('click', function() {
-                startQuiz();
-            });
+
+        // Event Listeners
+        topicSelector.addEventListener('change', handleTopicSelection);
+        startButton.addEventListener('click', startQuiz);
+        restartButton.addEventListener('click', restartQuiz);
+        closeUpgradeButton.addEventListener('click', closeUpgradeModal);
+
+        // Functions
+        function handleTopicSelection() {
+            if (topicSelector.value) {
+                startButton.disabled = false;
+            } else {
+                startButton.disabled = true;
+            }
         }
-        
-        // Start the quiz with the selected topic
+
+        function showUpgradeModal() {
+            upgradeModal.style.display = 'flex';
+        }
+
+        function closeUpgradeModal() {
+            upgradeModal.style.display = 'none';
+        }
+
         function startQuiz() {
             // Reset quiz state
-            currentQuestionIndex = 0;
+            currentQuestion = 0;
             score = 0;
-            selectedAnswers = Array(10).fill(null);
+            scoreElement.textContent = '0';
             
-            // Get 10 random questions for the selected topic
-            questions = getRandomQuestions(questionBanks[currentTopic], 10);
+            // Get selected topic
+            const topic = topicSelector.value;
             
-            // Update UI
-            quizTitle.textContent = getTopicName(currentTopic) + " Quiz";
-            totalQuestionsSpan.textContent = questions.length;
+            // Select 10 random questions from the topic
+            const allQuestions = questionBanks[topic];
+            questions = getRandomQuestions(allQuestions, 10);
             
-            // Show the quiz container
-            topicSelector.style.display = 'none';
+            // Hide intro, show quiz
+            quizIntro.style.display = 'none';
             quizContainer.style.display = 'block';
             resultsContainer.style.display = 'none';
             
-            // Load the first question
-            loadQuestion();
+            // Load first question
+            loadQuestion(currentQuestion);
         }
-        
-        // Load the current question
-        function loadQuestion() {
-            const question = questions[currentQuestionIndex];
-            currentQuestionSpan.textContent = currentQuestionIndex + 1;
-            
-            // Update question text
-            questionElement.textContent = question.question;
-            
-            // Clear previous options
-            optionsElement.innerHTML = '';
-            
-            // Add new options
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                if (selectedAnswers[currentQuestionIndex] === index) {
-                    optionElement.classList.add('selected');
-                }
-                
-                optionElement.innerHTML = `
-                    <div class="option-prefix">${String.fromCharCode(65 + index)}</div>
-                    <div class="option-text">${option}</div>
-                `;
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsElement.appendChild(optionElement);
-            });
-            
-            // Update button text based on question
-            if (currentQuestionIndex === questions.length - 1) {
-                nextBtn.textContent = 'Finish Quiz';
-            } else {
-                nextBtn.textContent = 'Next Question';
-            }
+
+        function getRandomQuestions(questions, count) {
+            const shuffled = [...questions].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
         }
-        
-        // Select an option
-        function selectOption(optionIndex) {
-            selectedAnswers[currentQuestionIndex] = optionIndex;
-            
-            // Update UI to show selected option
-            const options = optionsElement.querySelectorAll('.option');
-            options.forEach((option, index) => {
-                if (index === optionIndex) {
-                    option.classList.add('selected');
-                } else {
-                    option.classList.remove('selected');
-                }
-            });
-        }
-        
-        // Go to next question or finish quiz
-        function goToNextQuestion() {
-            // Check if an option is selected
-            if (selectedAnswers[currentQuestionIndex] === null) {
-                alert('Please select an answer before proceeding.');
+
+        function loadQuestion(index) {
+            if (index >= questions.length) {
+                showResults();
                 return;
             }
             
-            // Check if current answer is correct
-            if (selectedAnswers[currentQuestionIndex] === questions[currentQuestionIndex].answer) {
-                score++;
-            }
+            answered = false;
+            const question = questions[index];
             
-            // Go to next question or finish
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion();
-            } else {
-                finishQuiz();
-            }
+            // Update question counter
+            currentQuestionElement.textContent = index + 1;
+            totalQuestionsElement.textContent = questions.length;
+            
+            // Display question
+            questionElement.textContent = question.question;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Add options
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.textContent = option;
+                optionElement.dataset.index = i;
+                optionElement.addEventListener('click', checkAnswer);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Start timer
+            startTimer();
         }
-        
-        // Finish quiz and show results
-        function finishQuiz() {
-            // Calculate score
-            const percentage = (score / questions.length) * 100;
+
+        function startTimer() {
+            clearInterval(timer);
+            timeLeft = 20;
+            timerBar.style.width = '100%';
             
-            // Update results UI
-            resultsTopic.textContent = getTopicName(currentTopic) + " Quiz";
-            scoreElement.textContent = `${score}/${questions.length}`;
-            scoreTextElement.textContent = `You scored ${percentage}%`;
+            timer = setInterval(() => {
+                timeLeft -= 0.1;
+                const percentage = (timeLeft / 20) * 100;
+                timerBar.style.width = `${percentage}%`;
+                
+                // Color changes based on time left
+                if (percentage < 30) {
+                    timerBar.style.backgroundColor = '#e74c3c'; // Red when time is running out
+                } else if (percentage < 60) {
+                    timerBar.style.backgroundColor = '#f39c12'; // Orange when at medium
+                } else {
+                    timerBar.style.backgroundColor = '#2ecc71'; // Green when plenty of time
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    if (!answered) {
+                        // Time's up - show correct answer
+                        const correctIndex = questions[currentQuestion].answer;
+                        const options = document.querySelectorAll('.option');
+                        options.forEach(option => {
+                            const optionIndex = parseInt(option.dataset.index);
+                            if (optionIndex === correctIndex) {
+                                option.classList.add('correct');
+                            }
+                            option.classList.add('disabled');
+                        });
+                        
+                        // Move to next question after delay
+                        setTimeout(() => {
+                            currentQuestion++;
+                            loadQuestion(currentQuestion);
+                        }, 1500);
+                    }
+                }
+            }, 100);
+        }
+
+        function checkAnswer(e) {
+            if (answered) return;
             
-            // Show results
+            answered = true;
+            clearInterval(timer);
+            
+            const selectedOption = e.target;
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            const correctIndex = questions[currentQuestion].answer;
+            
+            // Disable all options
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.classList.add('disabled');
+            });
+            
+            // Check if answer is correct
+            if (selectedIndex === correctIndex) {
+                selectedOption.classList.add('correct');
+                score++;
+                scoreElement.textContent = score;
+            } else {
+                selectedOption.classList.add('incorrect');
+                // Show correct answer
+                options[correctIndex].classList.add('correct');
+            }
+            
+            // Move to next question after delay
+            setTimeout(() => {
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            }, 1500);
+        }
+
+        function showResults() {
             quizContainer.style.display = 'none';
             resultsContainer.style.display = 'block';
+            finalScoreElement.textContent = score;
         }
-        
-        // Show topic selector
-        function showTopicSelector() {
-            topicSelector.style.display = 'block';
-            quizContainer.style.display = 'none';
+
+        function restartQuiz() {
             resultsContainer.style.display = 'none';
+            quizIntro.style.display = 'block';
+            topicSelector.value = '';
+            startButton.disabled = true;
         }
-        
-        // Get random questions from a question bank
-        function getRandomQuestions(bank, count) {
-            const shuffled = [...bank].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-        
-        // Get topic name from topic code
-        function getTopicName(topic) {
-            switch(topic) {
-                case 'civil': return 'Civil Engineering';
-                case 'mechanical': return 'Mechanical Engineering';
-                case 'electrical': return 'Electrical Engineering';
-                default: return '';
-            }
-        }
-        
-        // Show PRO tooltip
-        function showProTooltip(event) {
-            proTooltip.style.left = `${event.pageX}px`;
-            proTooltip.style.top = `${event.pageY - 40}px`;
-            proTooltip.style.opacity = '1';
-            
-            setTimeout(() => {
-                proTooltip.style.opacity = '0';
-            }, 2000);
-        }
-        
-        // Initialize on load
-        window.addEventListener('load', init);
     </script>
 </body>
 </html>
