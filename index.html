@@ -7,869 +7,928 @@
     <style>
         :root {
             --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --pro-color: #f39c12;
-            --light-bg: #ecf0f1;
-            --dark-bg: #2c3e50;
-            --text-light: #f8f9fa;
-            --text-dark: #2c3e50;
-            --success-color: #2ecc71;
-            --warning-color: #f39c12;
+            --secondary-color: #2ecc71;
             --danger-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --timer-bg: #f39c12;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
         }
-        
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
         header {
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
-        header h1 {
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
         }
-        
-        .logo-text {
-            color: var(--primary-color);
-            margin-right: 5px;
-        }
-        
+
         .pro-badge {
-            background-color: var(--pro-color);
-            color: var(--text-light);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
             font-size: 0.8rem;
             font-weight: bold;
             margin-left: 10px;
         }
-        
-        .user-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        button:hover {
-            background-color: #2980b9;
-        }
-        
-        .pro-btn {
-            background-color: var(--pro-color);
-        }
-        
-        .pro-btn:hover {
-            background-color: #d35400;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            flex: 1;
-        }
-        
-        .quiz-settings {
+
+        .quiz-setup {
             background-color: white;
-            padding: 2rem;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
-        
-        .settings-header {
+
+        .topic-selection {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-        
-        .settings-header h2 {
-            color: var(--secondary-color);
+
+        label {
+            font-weight: bold;
         }
-        
-        .setup-form {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: flex-end;
-        }
-        
-        .form-group {
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-        }
-        
-        .form-group select, 
-        .form-group input {
-            width: 100%;
-            padding: 0.5rem;
+
+        select {
+            padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 1rem;
+            width: 100%;
         }
-        
-        .start-btn {
-            background-color: var(--success-color);
-            padding: 0.6rem 1.5rem;
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
             font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
-        
-        .start-btn:hover {
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-start {
+            width: 100%;
+            background-color: var(--secondary-color);
+        }
+
+        .btn-start:hover {
             background-color: #27ae60;
         }
-        
-        .quiz-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: none;
+
+        .btn-danger {
+            background-color: var(--danger-color);
         }
-        
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .quiz-container, .results-container, .leaderboard-container, .review-container {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
         .quiz-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
             border-bottom: 1px solid #eee;
         }
-        
-        .quiz-info {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .info-item {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .info-label {
-            font-size: 0.8rem;
-            color: #777;
-        }
-        
-        .info-value {
-            font-weight: 600;
+
+        .question-counter, .score-display {
+            font-weight: bold;
             font-size: 1.1rem;
         }
-        
+
         .timer-container {
             width: 100%;
             height: 10px;
-            background-color: #eee;
+            background-color: #ddd;
             border-radius: 5px;
+            margin-bottom: 20px;
             overflow: hidden;
-            margin-bottom: 1.5rem;
         }
-        
+
         .timer-bar {
             height: 100%;
             width: 100%;
-            background-color: var(--primary-color);
+            background-color: var(--timer-bg);
+            border-radius: 5px;
             transition: width 0.1s linear;
         }
-        
-        .question-container {
-            margin-bottom: 2rem;
+
+        .question {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
-        
-        .question-text {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-        
-        .options-container {
+
+        .options {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-        
+
         .option {
-            padding: 1rem;
-            border: 2px solid #eee;
-            border-radius: 6px;
+            padding: 15px;
+            background-color: var(--light-color);
+            border: 1px solid #ddd;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: background-color 0.3s, transform 0.1s;
         }
-        
+
         .option:hover {
-            border-color: var(--primary-color);
-            background-color: #f8f9fa;
+            background-color: #ddd;
+            transform: translateY(-2px);
         }
-        
-        .option.selected {
-            border-color: var(--primary-color);
-            background-color: #e3f2fd;
-        }
-        
-        .option.correct {
-            border-color: var(--success-color);
-            background-color: #d4edda;
-        }
-        
-        .option.incorrect {
-            border-color: var(--danger-color);
-            background-color: #f8d7da;
-        }
-        
-        .quiz-controls {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .next-btn {
+
+        .selected {
             background-color: var(--primary-color);
+            color: white;
         }
-        
-        .results-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: none;
+
+        .correct {
+            background-color: var(--secondary-color);
+            color: white;
         }
-        
-        .results-header {
+
+        .incorrect {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .results-container h2, .leaderboard-container h2, .review-container h2 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .results-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .result-item {
+            flex: 1 0 30%;
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 4px;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 10px;
         }
-        
-        .results-header h2 {
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .score-display {
-            font-size: 3rem;
+
+        .result-value {
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-color);
-            margin: 1rem 0;
         }
-        
-        .score-message {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .performance-stats {
+
+        .results-actions, .review-actions {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            min-width: 150px;
-        }
-        
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .results-actions {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .review-btn {
-            background-color: var(--warning-color);
-        }
-        
-        .review-btn:hover {
-            background-color: #e67e22;
-        }
-        
-        .restart-btn {
-            background-color: var(--success-color);
-        }
-        
-        .restart-btn:hover {
-            background-color: #27ae60;
-        }
-        
-        .review-section {
-            margin-top: 2rem;
-            display: none;
-        }
-        
-        .review-list {
-            list-style-type: none;
-        }
-        
-        .review-item {
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 1rem;
-        }
-        
-        .review-question {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .review-answer {
-            color: var(--success-color);
-            font-weight: 500;
-        }
-        
-        .review-explanation {
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .your-answer {
-            margin-top: 0.5rem;
-        }
-        
-        .your-answer.correct {
-            color: var(--success-color);
-        }
-        
-        .your-answer.incorrect {
-            color: var(--danger-color);
-        }
-        
-        .leaderboard-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-top: 2rem;
-        }
-        
-        .leaderboard-header {
-            display: flex;
+            gap: 10px;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            margin-top: 20px;
         }
-        
-        .leaderboard-title {
-            color: var(--secondary-color);
-        }
-        
+
         .leaderboard-table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
-        
-        .leaderboard-table th,
-        .leaderboard-table td {
-            padding: 0.75rem;
+
+        .leaderboard-table th, .leaderboard-table td {
+            padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #ddd;
         }
-        
+
         .leaderboard-table th {
-            background-color: #f8f9fa;
-            font-weight: 600;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .leaderboard-table tr:nth-child(even) {
+            background-color: var(--light-color);
+        }
+
+        .review-item {
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .review-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .review-options {
+            margin-bottom: 10px;
+        }
+
+        .review-option {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+        }
+
+        .review-user-answer {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .review-correct {
             color: var(--secondary-color);
         }
-        
-        .leaderboard-table tr:hover {
-            background-color: #f8f9fa;
+
+        .review-incorrect {
+            color: var(--danger-color);
         }
-        
-        .username {
-            font-weight: 500;
-        }
-        
-        .rank {
-            font-weight: bold;
-            width: 50px;
-            text-align: center;
-        }
-        
-        .rank-1 {
-            color: gold;
-        }
-        
-        .rank-2 {
-            color: silver;
-        }
-        
-        .rank-3 {
-            color: #cd7f32;
-        }
-        
-        .pro-user {
-            color: var(--pro-color);
-            font-weight: bold;
-        }
-        
-        .upgrade-overlay {
+
+        .modal {
+            display: none;
             position: fixed;
-            top: 0;
+            z-index: 1;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            display: none;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
         }
-        
-        .upgrade-modal {
+
+        .modal-content {
             background-color: white;
-            padding: 2rem;
+            margin: 15% auto;
+            padding: 20px;
             border-radius: 8px;
             max-width: 500px;
-            width: 90%;
-            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        
-        .upgrade-header {
-            margin-bottom: 1.5rem;
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
         }
-        
-        .upgrade-header h2 {
-            color: var(--pro-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .features-list {
-            text-align: left;
-            margin: 1.5rem 0;
-            list-style-position: inside;
-        }
-        
-        .features-list li {
-            margin-bottom: 0.5rem;
-            padding-left: 1rem;
-        }
-        
-        .features-list li::before {
-            content: "✓ ";
-            color: var(--pro-color);
-            font-weight: bold;
-        }
-        
-        .upgrade-btn {
-            background-color: var(--pro-color);
-            padding: 0.75rem 2rem;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-        }
-        
-        .upgrade-btn:hover {
-            background-color: #d35400;
-        }
-        
-        .close-modal {
+
+        .close {
             color: #aaa;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5rem;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
             cursor: pointer;
         }
-        
-        .close-modal:hover {
-            color: #333;
+
+        .close:hover {
+            color: black;
         }
-        
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            color: #888;
+        }
+
         @media (max-width: 768px) {
             .container {
-                padding: 1rem;
+                padding: 10px;
             }
-            
-            .options-container {
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .options {
                 grid-template-columns: 1fr;
             }
-            
-            .performance-stats {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .quiz-info {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .setup-form {
+
+            .results-details {
                 flex-direction: column;
             }
-            
-            header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-                padding: 1rem;
+
+            .result-item {
+                flex: 1 0 100%;
             }
-            
-            .user-controls {
+
+            .results-actions, .review-actions {
+                flex-direction: column;
+            }
+
+            .btn {
                 width: 100%;
-                justify-content: center;
+                margin-bottom: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1><span class="logo-text">Engineering</span> Quiz Speed Test <span class="pro-badge">PRO</span></h1>
-        <div class="user-controls">
-            <button id="login-btn">Login</button>
-            <button id="toggle-pro-btn" class="pro-btn">Activate Pro</button>
-        </div>
-    </header>
-    
     <div class="container">
-        <div class="quiz-settings">
-            <div class="settings-header">
-                <h2>Quiz Setup</h2>
+        <header>
+            <h1>Engineering Quiz Speed Test <span class="pro-badge">PRO</span></h1>
+            <p>Test your knowledge with timed quizzes on various engineering topics</p>
+        </header>
+
+        <div class="quiz-setup">
+            <div class="topic-selection">
+                <label for="topic">Select Engineering Topic:</label>
+                <select id="topic">
+                    <option value="" disabled selected>Choose a topic</option>
+                    <option value="mechanical">Mechanical Engineering</option>
+                    <option value="electrical">Electrical Engineering</option>
+                    <option value="civil">Civil Engineering</option>
+                    <option value="chemical">Chemical Engineering</option>
+                    <option value="software">Software Engineering</option>
+                    <option value="aerospace">Aerospace Engineering</option>
+                    <option value="biomedical">Biomedical Engineering</option>
+                    <option value="environmental">Environmental Engineering</option>
+                </select>
             </div>
-            <div class="setup-form">
-                <div class="form-group">
-                    <label for="topic-select">Select Topic:</label>
-                    <select id="topic-select">
-                        <option value="Civil">Civil Engineering</option>
-                        <option value="Mechanical">Mechanical Engineering</option>
-                        <option value="Electrical">Electrical Engineering</option>
-                        <option value="Chemical" class="pro-option">Chemical Engineering (PRO)</option>
-                        <option value="Software" class="pro-option">Software Engineering (PRO)</option>
-                        <option value="Aerospace" class="pro-option">Aerospace Engineering (PRO)</option>
-                        <option value="Biomedical" class="pro-option">Biomedical Engineering (PRO)</option>
-                        <option value="Environmental" class="pro-option">Environmental Engineering (PRO)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="username-input">Username:</label>
-                    <input type="text" id="username-input" placeholder="Enter your username">
-                </div>
-                <button id="start-quiz" class="start-btn">Start Quiz</button>
-            </div>
+            <button id="start-quiz" class="btn btn-start">Start Quiz</button>
         </div>
-        
+
         <div id="quiz-container" class="quiz-container">
             <div class="quiz-header">
-                <div class="quiz-info">
-                    <div class="info-item">
-                        <span class="info-label">Topic</span>
-                        <span id="current-topic" class="info-value">Civil Engineering</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Question</span>
-                        <span id="question-number" class="info-value">1/10</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Score</span>
-                        <span id="current-score" class="info-value">0</span>
-                    </div>
-                </div>
+                <div class="question-counter">Question 1/10</div>
+                <div class="score-display">Score: 0</div>
             </div>
-            
             <div class="timer-container">
-                <div id="timer-bar" class="timer-bar"></div>
+                <div class="timer-bar"></div>
             </div>
-            
-            <div class="question-container">
-                <h3 id="question-text" class="question-text">Question will appear here</h3>
-                <div id="options-container" class="options-container">
-                    <!-- Options will be populated by JavaScript -->
-                </div>
-            </div>
+            <div id="question" class="question"></div>
+            <div id="options" class="options"></div>
         </div>
-        
+
         <div id="results-container" class="results-container">
-            <div class="results-header">
-                <h2>Quiz Results</h2>
-                <div id="score-display" class="score-display">7/10</div>
-                <p id="score-message" class="score-message">Great job! You answered 7 out of 10 questions correctly.</p>
-            </div>
-            
-            <div class="performance-stats">
-                <div class="stat-item">
-                    <div id="accuracy" class="stat-value">70%</div>
-                    <div class="stat-label">Accuracy</div>
+            <h2>Quiz Results</h2>
+            <div class="results-details">
+                <div class="result-item">
+                    <div>Score</div>
+                    <div id="final-score" class="result-value">0/10</div>
                 </div>
-                <div class="stat-item">
-                    <div id="avg-time" class="stat-value">12.3s</div>
-                    <div class="stat-label">Avg. Response Time</div>
+                <div class="result-item">
+                    <div>Correct Answers</div>
+                    <div id="correct-answers" class="result-value">0</div>
                 </div>
-                <div class="stat-item">
-                    <div id="fastest-time" class="stat-value">5.2s</div>
-                    <div class="stat-label">Fastest Response</div>
+                <div class="result-item">
+                    <div>Time Taken</div>
+                    <div id="time-taken" class="result-value">0s</div>
                 </div>
             </div>
-            
             <div class="results-actions">
-                <button id="review-answers" class="review-btn">Review Answers</button>
-                <button id="restart-quiz" class="restart-btn">New Quiz</button>
-            </div>
-            
-            <div id="review-section" class="review-section">
-                <h3>Review Your Answers</h3>
-                <ul id="review-list" class="review-list">
-                    <!-- Review items will be populated by JavaScript -->
-                </ul>
+                <button id="save-score" class="btn">Save Score to Leaderboard</button>
+                <button id="view-review" class="btn">Review Answers</button>
+                <button id="restart-quiz" class="btn">Start New Quiz</button>
             </div>
         </div>
-        
+
         <div id="leaderboard-container" class="leaderboard-container">
-            <div class="leaderboard-header">
-                <h2 class="leaderboard-title">Top Performers</h2>
-            </div>
+            <h2>Leaderboard</h2>
             <table class="leaderboard-table">
                 <thead>
                     <tr>
                         <th>Rank</th>
-                        <th>Username</th>
+                        <th>Name</th>
                         <th>Topic</th>
                         <th>Score</th>
-                        <th>Accuracy</th>
-                        <th>Avg. Time</th>
+                        <th>Time</th>
                     </tr>
                 </thead>
-                <tbody id="leaderboard-body">
-                    <!-- Leaderboard entries will be populated by JavaScript -->
-                </tbody>
+                <tbody id="leaderboard-body"></tbody>
             </table>
+            <button id="back-to-results" class="btn">Back to Results</button>
         </div>
-    </div>
-    
-    <div id="upgrade-overlay" class="upgrade-overlay">
-        <div class="upgrade-modal">
-            <div class="upgrade-header">
-                <h2>Upgrade to PRO</h2>
-                <p>Unlock premium features to enhance your quiz experience!</p>
+
+        <div id="review-container" class="review-container">
+            <h2>Review Answers</h2>
+            <div id="review-items"></div>
+            <div class="review-actions">
+                <button id="back-to-results-from-review" class="btn">Back to Results</button>
+                <button id="new-quiz-from-review" class="btn btn-start">Start New Quiz</button>
             </div>
-            <ul class="features-list">
-                <li>Access all engineering topics</li>
-                <li>Enhanced question bank with 300+ questions</li>
-                <li>Detailed performance tracking and analytics</li>
-                <li>Review section to see correct answers</li>
-                <li>Personal quiz history</li>
-            </ul>
-            <button id="confirm-upgrade" class="upgrade-btn">Upgrade Now</button>
-            <p id="close-modal" class="close-modal">×</p>
         </div>
+
+        <div id="save-score-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Save Your Score</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="form-group">
+                    <label for="user-name">Your Name:</label>
+                    <input type="text" id="user-name" placeholder="Enter your name">
+                </div>
+                <button id="submit-score" class="btn btn-start">Save Score</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Engineering Quiz Speed Test Pro. All rights reserved.</p>
+        </footer>
     </div>
 
     <script>
-        // Quiz state variables
-        let isPro = false;
-        let currentQuestion = 0;
+        // DOM Elements
+        const topicSelect = document.getElementById('topic');
+        const startQuizBtn = document.getElementById('start-quiz');
+        const quizContainer = document.getElementById('quiz-container');
+        const questionCounter = document.querySelector('.question-counter');
+        const scoreDisplay = document.querySelector('.score-display');
+        const timerBar = document.querySelector('.timer-bar');
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const resultsContainer = document.getElementById('results-container');
+        const finalScoreElement = document.getElementById('final-score');
+        const correctAnswersElement = document.getElementById('correct-answers');
+        const timeTakenElement = document.getElementById('time-taken');
+        const saveScoreBtn = document.getElementById('save-score');
+        const viewReviewBtn = document.getElementById('view-review');
+        const restartQuizBtn = document.getElementById('restart-quiz');
+        const leaderboardContainer = document.getElementById('leaderboard-container');
+        const leaderboardBody = document.getElementById('leaderboard-body');
+        const backToResultsBtn = document.getElementById('back-to-results');
+        const reviewContainer = document.getElementById('review-container');
+        const reviewItems = document.getElementById('review-items');
+        const backToResultsFromReviewBtn = document.getElementById('back-to-results-from-review');
+        const newQuizFromReviewBtn = document.getElementById('new-quiz-from-review');
+        const saveScoreModal = document.getElementById('save-score-modal');
+        const closeModalBtn = document.querySelector('.close');
+        const userNameInput = document.getElementById('user-name');
+        const submitScoreBtn = document.getElementById('submit-score');
+        const quizSetup = document.querySelector('.quiz-setup');
+
+        // Quiz variables
+        let currentQuestionIndex = 0;
         let score = 0;
-        let questions = [];
-        let currentTopic = "Civil";
-        let quizStarted = false;
         let timer;
         let timeLeft = 20;
-        let isAnswered = false;
-        let username = "";
-        let quizResults = {
-            correct: 0,
-            incorrect: 0,
-            totalTime: 0,
-            responseTimes: []
+        let totalTime = 0;
+        let quizQuestions = [];
+        let userAnswers = [];
+        let quizTopic = '';
+
+        // Question banks for each topic
+        // NOTE: These are empty arrays that you'll fill in later
+        const questionBanks = {
+            mechanical: [],
+            electrical: [],
+            civil: [],
+            chemical: [],
+            software: [],
+            aerospace: [],
+            biomedical: [],
+            environmental: []
         };
-        
-        // DOM Elements
-        const startQuizBtn = document.getElementById("start-quiz");
-        const topicSelect = document.getElementById("topic-select");
-        const usernameInput = document.getElementById("username-input");
-        const quizContainer = document.getElementById("quiz-container");
-        const resultsContainer = document.getElementById("results-container");
-        const questionText = document.getElementById("question-text");
-        const optionsContainer = document.getElementById("options-container");
-        const questionNumber = document.getElementById("question-number");
-        const currentScore = document.getElementById("current-score");
-        const currentTopicSpan = document.getElementById("current-topic");
-        const timerBar = document.getElementById("timer-bar");
-        const scoreDisplay = document.getElementById("score-display");
-        const scoreMessage = document.getElementById("score-message");
-        const accuracySpan = document.getElementById("accuracy");
-        const avgTimeSpan = document.getElementById("avg-time");
-        const fastestTimeSpan = document.getElementById("fastest-time");
-        const reviewAnswersBtn = document.getElementById("review-answers");
-        const restartQuizBtn = document.getElementById("restart-quiz");
-        const reviewSection = document.getElementById("review-section");
-        const reviewList = document.getElementById("review-list");
-        const leaderboardBody = document.getElementById("leaderboard-body");
-        const upgradeOverlay = document.getElementById("upgrade-overlay");
-        const closeModalBtn = document.getElementById("close-modal");
-        const toggleProBtn = document.getElementById("toggle-pro-btn");
-        const confirmUpgradeBtn = document.getElementById("confirm-upgrade");
-        
-        // Question bank
-        const questionBank = {
-            Civil: [
-                {
-                    question: "What is the main component of cement?",
-                    options: ["Limestone", "Sand", "Clay", "Gravel"],
-                    correctAnswer: 0,
-                    explanation: "Limestone (calcium carbonate) is the main component of cement. When heated, it forms calcium oxide, which is essential for cement production."
-                },
-                {
-                    question: "Which type of foundation is best suited for buildings on soft soil?",
-                    options: ["Raft foundation", "Strip foundation", "Pad foundation", "Pile foundation"],
-                    correctAnswer: 3,
-                    explanation: "Pile foundations transfer the building load to deeper, more stable soil layers, making them ideal for soft soil conditions."
-                },
-                {
-                    question: "What is the primary function of a retaining wall?",
-                    options: ["Support vertical loads", "Prevent soil erosion", "Hold back soil masses", "Decorative purposes"],
-                    correctAnswer: 2,
-                    explanation: "Retaining walls are primarily designed to hold back soil masses and prevent the downslope movement of soil."
-                },
-                {
-                    question: "Which of the following is NOT a type of beam?",
-                    options: ["Cantilever beam", "Simply supported beam", "Fixed beam", "Tensile beam"],
-                    correctAnswer: 3,
-                    explanation: "Tensile beam is not a standard type of beam. The main types are cantilever, simply supported, fixed, and continuous beams."
-                },
-                {
-                    question: "What does the slump test measure in concrete?",
-                    options: ["Strength", "Durability", "Workability", "Setting time"],
-                    correctAnswer: 2,
-                    explanation: "The slump test measures the workability or consistency of concrete, indicating how easily it can be placed and compacted."
-                },
-                {
-                    question: "Which structural system is most efficient for resisting lateral loads in tall buildings?",
-                    options: ["Moment frames", "Braced frames", "Shear walls", "Flat slabs"],
-                    correctAnswer: 2,
-                    explanation: "Shear walls provide excellent lateral stiffness and strength, making them very efficient for resisting lateral loads in tall buildings."
-                },
-                {
-                    question: "What is the minimum concrete cover required for reinforcement in beams exposed to weather?",
-                    options: ["15mm", "25mm", "40mm", "50mm"],
-                    correctAnswer: 2,
-                    explanation: "A minimum cover of 40mm is typically required for reinforcement in beams exposed to weather to prevent corrosion."
-                },
-                {
-                    question: "Which test is used to determine the California Bearing Ratio (CBR) of soil?",
-                    options: ["Compaction test", "Penetration test", "Direct shear test", "Triaxial test"],
-                    correctAnswer: 1,
-                    explanation: "The CBR is determined by a penetration test, which measures the resistance of soil to penetration by a standard plunger."
-                },
-                {
-                    question: "What is the main cause of creep in concrete structures?",
-                    options: ["Temperature variation", "Sustained loading", "Chemical attack", "Reinforcement corrosion"],
-                    correctAnswer: 1,
-                    explanation: "Creep in concrete is primarily caused by sustained or long-term loading, resulting in gradual deformation over time."
-                },
-                {
-                    question: "Which of the following is an advantage of prestressed concrete over reinforced concrete?",
-                    options: ["Lower cost", "Better crack control", "Simpler construction", "Higher fire resistance"],
-                    correctAnswer: 1,
-                    explanation: "Prestressed concrete offers better crack control as it is designed to remain in compression under service loads, preventing tensile cracks."
-                },
-                {
-                    question: "What is the purpose of a construction joint in concrete structures?",
-                    options: ["To allow for thermal expansion", "To permit planned interruptions in concrete placement", "To absorb seismic forces", "To prevent water penetration"],
-                    correctAnswer: 1,
-                    explanation: "Construction joints allow for planned interruptions in concrete placement between construction sequences or days of work."
-                },
-                {
-                    question: "Which material is commonly used as a waterproofing membrane in basement construction?",
-                    options: ["Bitumen", "Polyethylene", "Both A and B", "Neither A nor B"],
-                    correctAnswer: 2,
-                    explanation: "Both bitumen-based products and polyethylene sheets are commonly used as waterproofing membranes in basement construction."
-                },
-                {
-                    question: "What is the primary function of a weep hole in a retaining wall?",
-                    options: ["Aesthetic purposes", "Allow air circulation", "Reduce wall weight", "Relieve hydrostatic pressure"],
-                    correctAnswer: 3,
-                    explanation: "Weep holes allow water to drain from behind the retaining wall, reducing hydrostatic pressure that could cause wall failure."
-                },
-                {
-                    question: "Which type of cement is best suited for mass concrete structures like dams?",
-                    options: ["Rapid hardening cement", "Ordinary Portland cement", "Low heat cement", "High alumina cement"],
-                    correctAnswer: 2,
-                    explanation: "Low heat cement is ideal for mass concrete structures as it generates less heat during hydration, reducing thermal cracking."
-                },
-                {
-                    question: "What is the primary advantage of a space frame structural system?",
-                    options: ["Low cost", "Spans large areas with minimal support", "Simple construction", "High thermal mass"],
-                    correctAnswer: 1,
-                    explanation: "Space frames can span large areas with minimal intermediate support, making them ideal for structures like exhibition halls and stadiums."
+
+        // Leaderboard data
+        let leaderboard = JSON.parse(localStorage.getItem('quizLeaderboard')) || [];
+
+        // Event Listeners
+        startQuizBtn.addEventListener('click', startQuiz);
+        saveScoreBtn.addEventListener('click', openSaveScoreModal);
+        viewReviewBtn.addEventListener('click', showReview);
+        restartQuizBtn.addEventListener('click', resetQuiz);
+        backToResultsBtn.addEventListener('click', showResults);
+        backToResultsFromReviewBtn.addEventListener('click', showResults);
+        newQuizFromReviewBtn.addEventListener('click', resetQuiz);
+        closeModalBtn.addEventListener('click', closeModal);
+        submitScoreBtn.addEventListener('click', saveScore);
+
+        window.addEventListener('click', (e) => {
+            if (e.target === saveScoreModal) {
+                closeModal();
+            }
+        });
+
+        // Functions
+        function startQuiz() {
+            quizTopic = topicSelect.value;
+            
+            if (!quizTopic) {
+                alert('Please select a topic first!');
+                return;
+            }
+            
+            // Get 10 random questions from the selected topic
+            const allQuestions = questionBanks[quizTopic];
+            
+            if (allQuestions.length < 10) {
+                alert('Not enough questions available for this topic. Please try another topic.');
+                return;
+            }
+            
+            quizQuestions = getRandomQuestions(allQuestions, 10);
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            totalTime = 0;
+            
+            // Show quiz container and hide other containers
+            quizSetup.style.display = 'none';
+            quizContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            leaderboardContainer.style.display = 'none';
+            reviewContainer.style.display = 'none';
+            
+            // Display first question
+            displayQuestion();
+        }
+
+        function getRandomQuestions(questions, count) {
+            const shuffled = [...questions].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function displayQuestion() {
+            // Update question counter
+            questionCounter.textContent = `Question ${currentQuestionIndex + 1}/10`;
+            scoreDisplay.textContent = `Score: ${score}`;
+            
+            // Get current question
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            
+            // Set question text
+            questionElement.textContent = currentQuestion.question;
+            
+            // Clear previous options
+            optionsElement.innerHTML = '';
+            
+            // Add options
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.textContent = option;
+                optionElement.dataset.index = index;
+                optionElement.addEventListener('click', selectOption);
+                optionsElement.appendChild(optionElement);
+            });
+            
+            // Start timer
+            startTimer();
+        }
+
+        function startTimer() {
+            // Reset timer
+            clearInterval(timer);
+            timeLeft = 20;
+            timerBar.style.width = '100%';
+            
+            // Start countdown
+            timer = setInterval(() => {
+                timeLeft--;
+                totalTime++;
+                
+                // Update timer bar
+                const percentage = (timeLeft / 20) * 100;
+                timerBar.style.width = `${percentage}%`;
+                
+                // Change color when time is running out
+                if (timeLeft <= 5) {
+                    timerBar.style.backgroundColor = '#e74c3c';
+                } else {
+                    timerBar.style.backgroundColor = '#f39c12';
                 }
-            ],
-            Mechanical: [
-                {
-                    question: "Which law states that the pressure of a gas is inversely proportional to its volume at constant temperature?",
-                    options: ["Charles' Law", "Boyle's Law", "Gay-Lussac's Law", "Avogadro's Law"],
-                    correctAnswer: 1,
-                    explanation: "Boyle's Law states that at constant temperature, the pressure of a gas is inversely proportional to its volume (P ∝ 1/V)."
-                },
-                {
-                    question: "What is the purpose of a flywheel in a machine?",
-                    options: ["To increase speed", "To store energy", "To reduce friction", "To change direction"],
-                    correctAnswer: 1,
-                    explanation: "Flywheels store rotational energy to maintain constant angular velocity and smooth out power delivery in engines and machines."
-                },
-                {
-                    question: "Which type of gear is used to transmit motion between non-parallel, non-intersecting shafts?",
-                    options: ["Spur gear", "Bevel gear", "Worm gear", "Helical gear"],
-                    correctAnswer: 2,
-                    explanation: "Worm gears are designed to transmit motion between non-parallel, non-intersecting shafts, typically at right angles to each other."
-                },
-                {
-                    question: "What is the efficiency formula for a heat engine?",
-                    options: ["Work output / Heat input", "Heat input / Work output", "Heat output / Heat input", "Work input / Heat input"],
-                    correctAnswer: 0,
-                    explanation: "The efficiency of a heat engine is the ratio of useful work output to the heat energy input (η = W/Q_in)."
-                },
-                {
-                    question: "Which bearing type can handle both
+                
+                // Time's up
+                if (timeLeft === 0) {
+                    clearInterval(timer);
+                    // Record that user didn't answer
+                    userAnswers.push({
+                        question: quizQuestions[currentQuestionIndex].question,
+                        userAnswer: null,
+                        correctAnswer: quizQuestions[currentQuestionIndex].options[quizQuestions[currentQuestionIndex].correctIndex],
+                        isCorrect: false
+                    });
+                    
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        function selectOption(event) {
+            // Clear interval
+            clearInterval(timer);
+            
+            // Get all options
+            const options = optionsElement.querySelectorAll('.option');
+            
+            // Remove any previous selections
+            options.forEach(option => {
+                option.classList.remove('selected');
+                option.removeEventListener('click', selectOption);
+            });
+            
+            // Add selected class to clicked option
+            event.target.classList.add('selected');
+            
+            // Get selected option index
+            const selectedIndex = parseInt(event.target.dataset.index);
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            const isCorrect = selectedIndex === currentQuestion.correctIndex;
+            
+            // Record user's answer
+            userAnswers.push({
+                question: currentQuestion.question,
+                userAnswer: currentQuestion.options[selectedIndex],
+                correctAnswer: currentQuestion.options[currentQuestion.correctIndex],
+                isCorrect: isCorrect
+            });
+            
+            // Update score if correct
+            if (isCorrect) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                event.target.classList.add('correct');
+            } else {
+                event.target.classList.add('incorrect');
+                
+                // Show correct answer
+                options[currentQuestion.correctIndex].classList.add('correct');
+            }
+            
+            // Wait 1 second before moving to next question
+            setTimeout(() => {
+                nextQuestion();
+            }, 1000);
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            // Check if quiz is finished
+            if (currentQuestionIndex >= quizQuestions.length) {
+                endQuiz();
+                return;
+            }
+            
+            // Display next question
+            displayQuestion();
+        }
+
+        function endQuiz() {
+            // Stop timer
+            clearInterval(timer);
+            
+            // Hide quiz container
+            quizContainer.style.display = 'none';
+            
+            // Show results
+            showResults();
+        }
+
+        function showResults() {
+            // Update result elements
+            finalScoreElement.textContent = `${score}/10`;
+            correctAnswersElement.textContent = score;
+            timeTakenElement.textContent = `${totalTime}s`;
+            
+            // Show results container
+            resultsContainer.style.display = 'block';
+            leaderboardContainer.style.display = 'none';
+            reviewContainer.style.display = 'none';
+        }
+
+        function openSaveScoreModal() {
+            saveScoreModal.style.display = 'block';
+            userNameInput.focus();
+        }
+
+        function closeModal() {
+            saveScoreModal.style.display = 'none';
+        }
+
+        function saveScore() {
+            const userName = userNameInput.value.trim();
+            
+            if (!userName) {
+                alert('Please enter your name!');
+                return;
+            }
+            
+            // Create score object
+            const scoreObj = {
+                name: userName,
+                topic: topicSelect.options[topicSelect.selectedIndex].text,
+                score: score,
+                time: totalTime,
+                date: new Date().toISOString()
+            };
+            
+            // Add to leaderboard
+            leaderboard.push(scoreObj);
+            
+            // Sort leaderboard by score (desc) and time (asc)
+            leaderboard.sort((a, b) => {
+                if (a.score !== b.score) {
+                    return b.score - a.score;
+                }
+                return a.time - b.time;
+            });
+            
+            // Trim leaderboard to top 10
+            if (leaderboard.length > 10) {
+                leaderboard = leaderboard.slice(0, 10);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('quizLeaderboard', JSON.stringify(leaderboard));
+            
+            // Close modal
+            closeModal();
+            
+            // Show leaderboard
+            displayLeaderboard();
+        }
+
+        function displayLeaderboard() {
+            // Clear leaderboard body
+            leaderboardBody.innerHTML = '';
+            
+            // Add entries
+            leaderboard.forEach((entry, index) => {
+                const row = document.createElement('tr');
+                
+                // Rank column
+                const rankCell = document.createElement('td');
+                rankCell.textContent = index + 1;
+                row.appendChild(rankCell);
+                
+                // Name column
+                const nameCell = document.createElement('td');
+                nameCell.textContent = entry.name;
+                row.appendChild(nameCell);
+                
+                // Topic column
+                const topicCell = document.createElement('td');
+                topicCell.textContent = entry.topic;
+                row.appendChild(topicCell);
+                
+                // Score column
+                const scoreCell = document.createElement('td');
+                scoreCell.textContent = `${entry.score}/10`;
+                row.appendChild(scoreCell);
+                
+                // Time column
+                const timeCell = document.createElement('td');
+                timeCell.textContent = `${entry.time}s`;
+                row.appendChild(timeCell);
+                
+                leaderboardBody.appendChild(row);
+            });
+            
+            // Show leaderboard container
+            resultsContainer.style.display = 'none';
+            leaderboardContainer.style.display = 'block';
+            reviewContainer.style.display = 'none';
+        }
+
+        function showReview() {
+            // Clear review items
+            reviewItems.innerHTML = '';
+            
+            // Add review items for each question
+            userAnswers.forEach((answer, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.classList.add('review-item');
+                
+                // Question
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('review-question');
+                questionElement.textContent = `Q${index + 1}: ${answer.question}`;
+                reviewItem.appendChild(questionElement);
+                
+                // Options
+                const optionsElement = document.createElement('div');
+                optionsElement.classList.add('review-options');
+                
+                // Get options from the quiz questions
+                const questionOptions = quizQuestions[index].options;
+                questionOptions.forEach((option, optionIndex) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('review-option');
+                    
+                    // Highlight correct answer
+                    if (option === answer.correctAnswer) {
+                        optionElement.classList.add('correct');
+                        optionElement.textContent = `${option} ✓`;
+                    } else {
+                        optionElement.textContent = option;
+                    }
+                    
+                    optionsElement.appendChild(optionElement);
+                });
+                reviewItem.appendChild(optionsElement);
+                
+                // User answer
+                const userAnswerElement = document.createElement('div');
+                userAnswerElement.classList.add('review-user-answer');
+                
+                if (answer.userAnswer === null) {
+                    userAnswerElement.textContent = 'Your answer: No answer (Time expired)';
+                    userAnswerElement.classList.add('review-incorrect');
+                } else if (answer.isCorrect) {
+                    userAnswerElement.textContent = `Your answer: ${answer.userAnswer}`;
+                    userAnswerElement.classList.add('review-correct');
+                } else {
+                    userAnswerElement.textContent = `Your answer: ${answer.userAnswer}`;
+                    userAnswerElement.classList.add('review-incorrect');
+                }
+                
+                reviewItem.appendChild(userAnswerElement);
+                
+                // Add to review items
+                reviewItems.appendChild(reviewItem);
+            });
+            
+            // Show review container
+            resultsContainer.style.display = 'none';
+            leaderboardContainer.style.display = 'none';
+            reviewContainer.style.display = 'block';
+        }
+
+        function resetQuiz() {
+            // Reset quiz variables
+            currentQuestionIndex = 0;
+            score = 0;
+            totalTime = 0;
+            userAnswers = [];
+            
+            // Show topic selection
+            quizSetup.style.display = 'block';
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'none';
+            leaderboardContainer.style.display = 'none';
+            reviewContainer.style.display = 'none';
+            
+            // Reset topic selection
+            topicSelect.selectedIndex = 0;
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            resetQuiz();
+        });
+    </script>
+</body>
+</html>
