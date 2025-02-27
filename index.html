@@ -1,423 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accounting YouTube Viewer Pro</title>
-  <style>
-    :root {
-      --primary-color: #2c3e50;
-      --secondary-color: #3498db;
-      --accent-color: #e74c3c;
-      --light-color: #ecf0f1;
-      --dark-color: #34495e;
-      --success-color: #2ecc71;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-      background-color: var(--light-color);
-      color: var(--primary-color);
-      line-height: 1.6;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    header {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 20px 0;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-    }
-    
-    .logo-icon {
-      margin-right: 10px;
-      color: var(--secondary-color);
-    }
-    
-    .pro-badge {
-      background-color: var(--accent-color);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      margin-left: 10px;
-    }
-    
-    .main-content {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 30px;
-    }
-    
-    .control-panel {
-      background-color: white;
-      border-radius: 8px;
-      padding: 25px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: var(--dark-color);
-    }
-    
-    select, input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-    
-    select {
-      background-color: white;
-      cursor: pointer;
-    }
-    
-    select:focus, input:focus {
-      outline: none;
-      border-color: var(--secondary-color);
-      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-    }
-    
-    button {
-      background-color: var(--secondary-color);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      font-weight: 600;
-      width: 100%;
-    }
-    
-    button:hover {
-      background-color: #2980b9;
-    }
-    
-    .video-container {
-      background-color: white;
-      border-radius: 8px;
-      padding: 25px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      height: 0;
-      margin-bottom: 20px;
-    }
-    
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 4px;
-    }
-    
-    .placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-color: #f7f7f7;
-      height: 315px;
-      border-radius: 4px;
-      padding: 20px;
-      text-align: center;
-      color: #666;
-    }
-    
-    .placeholder i {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      color: #bbb;
-    }
-    
-    .video-info {
-      margin-top: 20px;
-    }
-    
-    .video-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    
-    .topic-tag {
-      display: inline-block;
-      background-color: var(--secondary-color);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      margin-bottom: 10px;
-    }
-    
-    .error-message {
-      color: var(--accent-color);
-      font-size: 0.9rem;
-      margin-top: 8px;
-      display: none;
-    }
-    
-    .success-message {
-      color: var(--success-color);
-      font-size: 0.9rem;
-      margin-top: 8px;
-      display: none;
-    }
-    
-    footer {
-      margin-top: 40px;
-      padding: 20px 0;
-      text-align: center;
-      color: #666;
-    }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .main-content {
-        grid-template-columns: 1fr;
-      }
-      
-      header .container {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .logo {
-        margin-bottom: 10px;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law Pro Video Platform</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+        
+        .pro-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--primary-color);
+        }
+        
+        .subheading {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: var(--light-color);
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        #videoDisplay {
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            background-color: var(--light-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .message {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .success {
+            background-color: rgba(46, 204, 113, 0.2);
+            border-left: 4px solid var(--success-color);
+            color: #27ae60;
+        }
+        
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-left: 4px solid var(--accent-color);
+            color: #c0392b;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
+    <header>
+        <div class="logo">
+            <span class="logo-icon">⚖️</span>
+            <h1>Law Video Platform <span class="pro-badge">PRO</span></h1>
+        </div>
+        <p class="subheading">Access specialized legal education videos by topic</p>
+    </header>
+    
     <div class="container">
-      <div class="logo">
-        <i class="fas fa-chart-line logo-icon"></i>
-        Accounting YouTube Viewer
-        <span class="pro-badge">PRO</span>
-      </div>
-    </div>
-  </header>
-  
-  <div class="container">
-    <div class="main-content">
-      <div class="control-panel">
-        <h2>Video Controls</h2>
-        <p>Select an accounting topic and enter a YouTube URL to view relevant content.</p>
-        
+        <h2>Find Legal Videos</h2>
         <div class="form-group">
-          <label for="topic-select">Accounting Topic</label>
-          <select id="topic-select">
-            <option value="">-- Select a Topic --</option>
-            <option value="financial-accounting">Financial Accounting</option>
-            <option value="managerial-accounting">Managerial Accounting</option>
-            <option value="tax-accounting">Tax Accounting</option>
-            <option value="audit-assurance">Audit & Assurance</option>
-            <option value="ifrs">IFRS</option>
-            <option value="gaap">GAAP</option>
-            <option value="cost-accounting">Cost Accounting</option>
-            <option value="forensic-accounting">Forensic Accounting</option>
-            <option value="cpa-exam">CPA Exam Preparation</option>
-            <option value="accounting-software">Accounting Software</option>
-            <option value="bookkeeping">Bookkeeping</option>
-            <option value="financial-reporting">Financial Reporting</option>
-          </select>
+            <label for="lawTopic">Select a Law Topic:</label>
+            <select id="lawTopic">
+                <option value="">-- Select a Topic --</option>
+                <option value="constitutional">Constitutional Law</option>
+                <option value="criminal">Criminal Law</option>
+                <option value="civil">Civil Law</option>
+                <option value="corporate">Corporate Law</option>
+                <option value="intellectual">Intellectual Property Law</option>
+                <option value="international">International Law</option>
+                <option value="environmental">Environmental Law</option>
+                <option value="tax">Tax Law</option>
+                <option value="family">Family Law</option>
+                <option value="labor">Labor Law</option>
+                <option value="immigration">Immigration Law</option>
+                <option value="bankruptcy">Bankruptcy Law</option>
+                <option value="real-estate">Real Estate Law</option>
+                <option value="tort">Tort Law</option>
+                <option value="healthcare">Healthcare Law</option>
+            </select>
         </div>
         
         <div class="form-group">
-          <label for="youtube-url">YouTube URL</label>
-          <input type="text" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." />
-          <div class="error-message" id="url-error">Please enter a valid YouTube URL</div>
+            <label for="youtubeUrl">YouTube Video URL:</label>
+            <input type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..." />
         </div>
         
-        <button id="load-video-btn">Load Video</button>
-        <div class="success-message" id="validation-success">Video validated for the selected topic!</div>
-      </div>
-      
-      <div class="video-container">
-        <div id="video-wrapper">
-          <div class="placeholder">
-            <i class="fas fa-play-circle"></i>
-            <h3>No Video Loaded</h3>
-            <p>Select a topic and enter a YouTube URL to display a video</p>
-          </div>
-        </div>
+        <button id="loadVideo">Load Video</button>
         
-        <div class="video-info">
-          <div class="topic-tag" id="current-topic">No Topic Selected</div>
-          <h3 class="video-title" id="video-title">No Video Loaded</h3>
-          <p id="video-description">Select an accounting topic and provide a YouTube URL to get started.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <footer>
-    <div class="container">
-      <p>© 2025 Accounting YouTube Viewer Pro. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const topicSelect = document.getElementById('topic-select');
-      const youtubeUrlInput = document.getElementById('youtube-url');
-      const loadVideoBtn = document.getElementById('load-video-btn');
-      const videoWrapper = document.getElementById('video-wrapper');
-      const currentTopic = document.getElementById('current-topic');
-      const videoTitle = document.getElementById('video-title');
-      const videoDescription = document.getElementById('video-description');
-      const urlError = document.getElementById('url-error');
-      const validationSuccess = document.getElementById('validation-success');
-      
-      // List of accounting keywords for topic validation
-      const topicKeywords = {
-        'financial-accounting': ['financial accounting', 'balance sheet', 'income statement', 'cash flow', 'financial statements', 'accounting principles'],
-        'managerial-accounting': ['managerial accounting', 'management accounting', 'cost analysis', 'budgeting', 'forecasting', 'performance measure'],
-        'tax-accounting': ['tax accounting', 'tax preparation', 'tax planning', 'tax compliance', 'IRS', 'tax return'],
-        'audit-assurance': ['audit', 'assurance', 'internal control', 'sox', 'compliance', 'risk assessment'],
-        'ifrs': ['ifrs', 'international financial reporting', 'global accounting standard'],
-        'gaap': ['gaap', 'generally accepted accounting principles', 'accounting standards'],
-        'cost-accounting': ['cost accounting', 'cost allocation', 'activity based costing', 'job costing', 'process costing'],
-        'forensic-accounting': ['forensic accounting', 'fraud', 'investigation', 'litigation support', 'dispute resolution'],
-        'cpa-exam': ['cpa exam', 'certified public accountant', 'cpa preparation', 'cpa review'],
-        'accounting-software': ['accounting software', 'quickbooks', 'sage', 'xero', 'freshbooks', 'wave accounting'],
-        'bookkeeping': ['bookkeeping', 'journal entries', 'ledger', 'trial balance', 'reconciliation'],
-        'financial-reporting': ['financial reporting', 'annual report', 'quarterly report', 'disclosure', '10-k', '10-q']
-      };
-      
-      // Function to extract video ID from YouTube URL
-      function getYouTubeVideoId(url) {
-        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        const match = url.match(regExp);
+        <div id="messageArea"></div>
         
-        if (match && match[2].length === 11) {
-          return match[2];
-        }
-        
-        return null;
-      }
-      
-      // Function to validate if a video matches the selected topic
-      function validateVideoForTopic(videoId, topicValue) {
-        // In a real application, this would check the video metadata or content
-        // For this demo, we'll simulate validation by assuming PRO version allows all videos
-        
-        // If this was a real implementation:
-        // 1. You might use the YouTube API to fetch video metadata
-        // 2. Check the video title/description for keywords related to the topic
-        // 3. Or maintain a database of pre-validated videos
-
-        // For demonstration, we're assuming all videos are valid in PRO version
-        return true;
-      }
-      
-      // Function to load the video
-      function loadVideo() {
-        const url = youtubeUrlInput.value.trim();
-        const topicValue = topicSelect.value;
-        const topicText = topicSelect.options[topicSelect.selectedIndex].text;
-        
-        // Hide previous messages
-        urlError.style.display = 'none';
-        validationSuccess.style.display = 'none';
-        
-        // Validate input
-        if (!topicValue) {
-          alert('Please select an accounting topic first.');
-          return;
-        }
-        
-        // Extract video ID from URL
-        const videoId = getYouTubeVideoId(url);
-        
-        if (!videoId) {
-          urlError.style.display = 'block';
-          return;
-        }
-        
-        // Validate video for selected topic
-        if (validateVideoForTopic(videoId, topicValue)) {
-          // Show success message
-          validationSuccess.style.display = 'block';
-          
-          // Create and embed the iframe
-          videoWrapper.innerHTML = `
-            <div class="video-wrapper">
-              <iframe
-                src="https://www.youtube.com/embed/${videoId}"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
+        <div id="videoDisplay">
+            <h2 id="videoTitle">Video Title</h2>
+            <div class="video-container">
+                <iframe id="videoFrame" frameborder="0" allowfullscreen></iframe>
             </div>
-          `;
-          
-          // Update video info
-          currentTopic.textContent = topicText;
-          videoTitle.textContent = "Accounting Video: " + topicText;
-          videoDescription.textContent = `This is a validated accounting video related to ${topicText}. Pro version allows access to all accounting topics.`;
-        } else {
-          // This would only run if validation failed (not in PRO version)
-          alert('This video does not appear to match the selected accounting topic. Please choose a relevant video.');
+            <div class="video-info">
+                <p id="topicDescription"></p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Law Video Platform Pro © 2025 | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Topic descriptions for the Pro version
+        const topicDescriptions = {
+            "constitutional": "Constitutional law deals with the fundamental principles by which the government exercises its authority. These videos cover interpretations of the Constitution, Supreme Court decisions, and the balance of powers.",
+            "criminal": "Criminal law concerns crimes committed against the public and the prosecution of individuals charged with such crimes. Explore cases, defenses, and procedural aspects.",
+            "civil": "Civil law deals with disputes between individuals, organizations, or between the two, in which compensation may be awarded to the victim. Learn about litigation process, torts, and remedies.",
+            "corporate": "Corporate law involves the formation and operations of corporations, shareholder rights, mergers and acquisitions, and corporate governance structures.",
+            "intellectual": "Intellectual property law protects creators and their works. Discover patents, copyrights, trademarks, and trade secrets in these comprehensive videos.",
+            "international": "International law governs relations between nations, including treaties, sovereignty, diplomatic relations, international crimes, and human rights.",
+            "environmental": "Environmental law addresses regulations and protections for the natural environment, including pollution control, resource conservation, and climate change policies.",
+            "tax": "Tax law covers the rules, policies and laws that oversee the tax process, including federal, state, and local taxes, and international tax treaties.",
+            "family": "Family law concerns matters related to family relationships, such as marriage, divorce, child custody, adoption, and domestic violence.",
+            "labor": "Labor law mediates the relationship between workers, employers, trade unions, and the government. Learn about workplace rights, regulations, and collective bargaining.",
+            "immigration": "Immigration law deals with the national statutes, regulations, and legal precedents governing immigration into a country, including citizenship and asylum seeking.",
+            "bankruptcy": "Bankruptcy law provides for the reduction or elimination of certain debts, and can provide a timeline for the repayment of non-dischargeable debts over time.",
+            "real-estate": "Real estate law covers rights to possession, use, and enjoyment of land and fixtures attached to the land, including ownership, acquisition, and sale.",
+            "tort": "Tort law addresses civil wrongs that cause someone to suffer loss or harm, resulting in legal liability for the person who commits the act.",
+            "healthcare": "Healthcare law governs the provision of healthcare services, medical practice, patient rights, pharmaceutical regulations, and healthcare institutions."
+        };
+        
+        // YouTube URL validation function
+        function validateYouTubeUrl(url) {
+            const youtubeRegExp = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+            return youtubeRegExp.test(url);
         }
-      }
-      
-      // Event listener for the load button
-      loadVideoBtn.addEventListener('click', loadVideo);
-      
-      // Allow enter key to submit
-      youtubeUrlInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          loadVideo();
+        
+        // Extract YouTube video ID
+        function extractVideoId(url) {
+            const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[7].length === 11) ? match[7] : false;
         }
-      });
-    });
-  </script>
+        
+        // Display message function
+        function showMessage(message, type) {
+            const messageArea = document.getElementById('messageArea');
+            messageArea.innerHTML = `<div class="message ${type}">${message}</div>`;
+            
+            // Clear message after 5 seconds
+            setTimeout(() => {
+                messageArea.innerHTML = '';
+            }, 5000);
+        }
+        
+        // Load video button event listener
+        document.getElementById('loadVideo').addEventListener('click', function() {
+            const topicSelect = document.getElementById('lawTopic');
+            const youtubeUrlInput = document.getElementById('youtubeUrl');
+            const videoDisplay = document.getElementById('videoDisplay');
+            const videoTitle = document.getElementById('videoTitle');
+            const videoFrame = document.getElementById('videoFrame');
+            const topicDescription = document.getElementById('topicDescription');
+            
+            const selectedTopic = topicSelect.value;
+            const youtubeUrl = youtubeUrlInput.value.trim();
+            
+            // Validate topic selection
+            if (!selectedTopic) {
+                showMessage('Please select a law topic first.', 'error');
+                return;
+            }
+            
+            // Validate YouTube URL
+            if (!validateYouTubeUrl(youtubeUrl)) {
+                showMessage('Please enter a valid YouTube URL.', 'error');
+                return;
+            }
+            
+            // Extract video ID
+            const videoId = extractVideoId(youtubeUrl);
+            if (!videoId) {
+                showMessage('Could not extract video ID from the URL.', 'error');
+                return;
+            }
+            
+            // Set video title based on topic
+            const topicName = topicSelect.options[topicSelect.selectedIndex].text;
+            videoTitle.textContent = `${topicName} Video`;
+            
+            // Set video iframe source
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
+            
+            // Set topic description
+            topicDescription.textContent = topicDescriptions[selectedTopic];
+            
+            // Show video display
+            videoDisplay.style.display = 'block';
+            
+            // Show success message
+            showMessage('Video loaded successfully!', 'success');
+            
+            // Scroll to video
+            videoDisplay.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
